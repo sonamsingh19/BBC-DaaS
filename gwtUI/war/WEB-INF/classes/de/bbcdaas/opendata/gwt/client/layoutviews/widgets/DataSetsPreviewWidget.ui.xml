@@ -1,0 +1,44 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	 xmlns:c="urn:import:com.google.gwt.user.cellview.client"
+	  xmlns:p1="urn:import:de.bbcdaas.opendata.gwt.client.layoutviews.widgets" xmlns:w="urn:import:com.google.gwt.widget.client">
+	<ui:style>
+	 .anchor:hover{
+      cursor: pointer;
+  }
+  		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel width="100%" height="100%">
+	<g:VerticalPanel width="100%">
+		
+		<g:Cell horizontalAlignment="ALIGN_RIGHT">
+			<g:HorizontalPanel spacing="5" width="400px">
+				<g:VerticalPanel>
+					<g:TextBox ui:field="searchTB"/>
+					<g:Anchor text="Advanced Search" ui:field="anchor" addStyleNames="{style.anchor}"/>
+				</g:VerticalPanel>
+				<p1:ImageButton styleName="imageBtn" text="Search" ui:field="goSearch"/>
+				<g:Image url="gwtUI/gwt/clean/images/icons/microfone.jpg" height="38px" width="41px"/>
+				
+					<p1:ImageButton  styleName="imageBtn" ui:field="refreshBtn" text="refresh"/>
+				<p1:ImageButton  styleName="imageBtn" text="Query" ui:field="queryBtn"/>
+				<g:ListBox visibleItemCount="1" ui:field="sortLBox"/>
+			</g:HorizontalPanel>
+		</g:Cell>
+				<g:HorizontalPanel width="100%" height="100%" horizontalAlignment="ALIGN_LEFT" spacing="15">
+			
+					<g:VerticalPanel width="80%" height="600px" horizontalAlignment="ALIGN_LEFT" ui:field="datasetsPreviewPanel">
+					<c:CellTable ui:field="cellTable" width="100%"/>
+					<c:SimplePager location="CENTER" pageSize="10" pageStart="0" page="0" ui:field="pager" width="100%" height="30px"/>
+				</g:VerticalPanel>
+					<g:SimplePanel ui:field="tagPanel" width="100%" height="100%"/>
+				
+				</g:HorizontalPanel>
+			</g:VerticalPanel>
+			
+	 
+	</g:HTMLPanel>
+</ui:UiBinder> 

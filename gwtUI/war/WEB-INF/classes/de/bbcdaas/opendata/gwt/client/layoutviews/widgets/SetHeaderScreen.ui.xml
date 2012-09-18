@@ -1,0 +1,27 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel width="600px" height="97%">
+		<g:VerticalPanel spacing="5" height="80%" width="600px">
+			<g:Label text="Set Column Names and Type"/>
+			<g:ScrollPanel width="600px" height="320px">
+				<g:FlexTable ui:field="columnsTable" cellPadding="10" cellSpacing="10" width="100%" height="80%"/>
+			</g:ScrollPanel>
+			<g:VerticalPanel spacing="10">
+			<g:DecoratorPanel>
+				<g:CheckBox text="First row of Dataset uploaded is Header?" ui:field="isFirstRowHeaderCB" checked="true"/>
+			</g:DecoratorPanel>
+			<g:Cell verticalAlignment="ALIGN_BOTTOM" horizontalAlignment="ALIGN_CENTER">
+				<g:PushButton text="Save And Move To Description" width="200px" ui:field="saveBtn"/>
+			</g:Cell>
+		</g:VerticalPanel>
+		</g:VerticalPanel>
+		
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

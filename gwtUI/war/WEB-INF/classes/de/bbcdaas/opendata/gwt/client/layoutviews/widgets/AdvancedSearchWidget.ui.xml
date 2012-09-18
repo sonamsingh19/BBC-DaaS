@@ -1,0 +1,50 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:p1="urn:import:de.bbcdaas.opendata.gwt.client.layoutviews.widgets">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+		
+	</ui:style>
+	<g:HTMLPanel>
+		<g:HorizontalPanel horizontalAlignment="ALIGN_RIGHT">
+			<g:Cell horizontalAlignment="ALIGN_RIGHT">
+				<p1:ImageButton text="X" ui:field="close" styleName="closeBtn"/>
+			</g:Cell>
+		</g:HorizontalPanel>
+		<g:VerticalPanel>
+			<g:Grid>
+				<g:row>
+					<g:customCell>
+						<g:Label text="After Date"/>
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Author"/>
+					</g:customCell>
+					<g:customCell>
+						<g:TextBox/>
+					</g:customCell>
+				</g:row>
+				<g:row>
+					<g:customCell>
+						<g:Label text="Min Downloads" width="98px"/>
+					</g:customCell>
+					<g:customCell>
+						<g:IntegerBox ui:field="minDownloads" width="172px"/>
+					</g:customCell>
+				</g:row>
+			</g:Grid>
+			<g:Cell horizontalAlignment="ALIGN_CENTER">
+				<p1:ImageButton text="Apply" styleName="imageBtn"/>
+			</g:Cell>
+		</g:VerticalPanel>
+		
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

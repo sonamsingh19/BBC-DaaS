@@ -1,0 +1,37 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.important {
+			font-weight: bold;
+		}
+	</ui:style>
+	<g:HTMLPanel>
+		<g:Grid>
+			<g:row>
+				<g:customCell>
+					<g:Label text="Current Email"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox ui:field="currentEmail"/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:Label text="New Email"/>
+				</g:customCell>
+				<g:customCell>
+					<g:TextBox/>
+				</g:customCell>
+			</g:row>
+			<g:row>
+				<g:customCell>
+					<g:HorizontalPanel horizontalAlignment="ALIGN_CENTER">
+						<g:Button text="Change"/>
+					</g:HorizontalPanel>
+				</g:customCell>
+			</g:row>
+		</g:Grid>
+
+	</g:HTMLPanel>
+</ui:UiBinder> 
