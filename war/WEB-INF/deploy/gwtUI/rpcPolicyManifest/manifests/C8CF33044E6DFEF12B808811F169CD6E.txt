@@ -1,0 +1,2 @@
+serviceClass: de.bbcdaas.opendata.gwt.client.services.ILoginService
+path: 78166D95238E2576041A0FF5E873DDF4.gwt.rpc

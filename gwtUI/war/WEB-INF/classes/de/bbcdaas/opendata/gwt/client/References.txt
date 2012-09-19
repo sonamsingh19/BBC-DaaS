@@ -1,2 +1,0 @@
-
-Tag Cloud code:http://code.google.com/p/gwt-tagcloud/

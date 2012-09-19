@@ -1,0 +1,215 @@
+#
+# There is insufficient memory for the Java Runtime Environment to continue.
+# Native memory allocation (malloc) failed to allocate 4092 bytes for char in c:\jdk7u1_32p\jdk7u3\hotspot\src\share\vm\utilities/stack.inline.hpp
+# Possible reasons:
+#   The system is out of physical RAM or swap space
+#   In 32 bit mode, the process size limit was hit
+# Possible solutions:
+#   Reduce memory load on the system
+#   Increase physical memory or swap space
+#   Check if swap backing store is full
+#   Use 64 bit Java on a 64 bit OS
+#   Decrease Java heap size (-Xmx/-Xms)
+#   Decrease number of Java threads
+#   Decrease Java thread stack sizes (-Xss)
+#   Set larger code cache with -XX:ReservedCodeCacheSize=
+# This output file may be truncated or incomplete.
+#
+#  Out of Memory Error (memory/allocation.inline.hpp:58), pid=2916, tid=6936
+#
+# JRE version: 7.0_03-b05
+# Java VM: Java HotSpot(TM) Client VM (22.1-b02 mixed mode windows-x86 )
+# Failed to write core dump. Minidumps are not enabled by default on client versions of Windows
+#
+
+---------------  T H R E A D  ---------------
+
+Current thread (0x0158fc00):  VMThread [stack: 0x013d0000,0x01420000] [id=6936]
+
+Stack: [0x013d0000,0x01420000],  sp=0x0141f67c,  free space=317k
+Native frames: (J=compiled Java code, j=interpreted, Vv=VM code, C=native code)
+V  [jvm.dll+0x162f81]
+V  [jvm.dll+0x15d98c]
+V  [jvm.dll+0x168149]
+V  [jvm.dll+0x16823f]
+V  [jvm.dll+0x9af6f]
+V  [jvm.dll+0x9b170]
+V  [jvm.dll+0x168642]
+V  [jvm.dll+0x168a61]
+V  [jvm.dll+0x728c6]
+V  [jvm.dll+0x6ec54]
+V  [jvm.dll+0x68c5f]
+V  [jvm.dll+0x6aaef]
+V  [jvm.dll+0x6afa0]
+V  [jvm.dll+0x69ac7]
+V  [jvm.dll+0x71363]
+V  [jvm.dll+0x686a6]
+V  [jvm.dll+0x5fe83]
+V  [jvm.dll+0x16b056]
+V  [jvm.dll+0x1485c5]
+V  [jvm.dll+0x1477fe]
+V  [jvm.dll+0x147b2c]
+V  [jvm.dll+0x147fa2]
+V  [jvm.dll+0x1720b9]
+C  [msvcr100.dll+0x5c6de]  endthreadex+0x3a
+C  [msvcr100.dll+0x5c788]  endthreadex+0xe4
+C  [kernel32.dll+0x4ed6c]  BaseThreadInitThunk+0x12
+C  [ntdll.dll+0x6377b]  RtlInitializeExceptionChain+0xef
+C  [ntdll.dll+0x6374e]  RtlInitializeExceptionChain+0xc2
+
+VM_Operation (0x28b5d3a4): GenCollectForAllocation, mode: safepoint, requested by thread 0x27763400
+
+
+---------------  P R O C E S S  ---------------
+
+Java Threads: ( => current thread )
+  0x27763400 JavaThread "Code server for mvp4gtest from Mozilla/5.0 (Windows NT 6.1) AppleWebKit/536.5 (KHTML, like Gecko) Chrome/19.0.1084.56 Safari/536.5 on http://127.0.0.1:8888/mvp4gtest/hosted.html?mvp4gtest @ @jiwd1)\*OkmU"1=" daemon [_thread_blocked, id=7608, stack(0x28b10000,0x28b60000)]
+  0x27762c00 JavaThread "btpool0-4" [_thread_blocked, id=6500, stack(0x281a0000,0x281f0000)]
+  0x292b5000 JavaThread "btpool0-3" [_thread_blocked, id=7004, stack(0x289f0000,0x28a40000)]
+  0x292b6400 JavaThread "btpool0-2" [_thread_blocked, id=6928, stack(0x296a0000,0x296f0000)]
+  0x28ff4800 JavaThread "Timer-0" daemon [_thread_blocked, id=1916, stack(0x296f0000,0x29740000)]
+  0x28ff4000 JavaThread "btpool0-1" [_thread_blocked, id=5152, stack(0x297e0000,0x29830000)]
+  0x28ffc800 JavaThread "btpool0-0 - Acceptor0 SelectChannelConnector@127.0.0.1:8888" [_thread_blocked, id=5280, stack(0x29750000,0x297a0000)]
+  0x28f69c00 JavaThread "GC Daemon" daemon [_thread_blocked, id=4672, stack(0x27b20000,0x27b70000)]
+  0x2879d000 JavaThread "com.google.gwt.thirdparty.guava.common.base.internal.Finalizer" daemon [_thread_blocked, id=5408, stack(0x28a40000,0x28a90000)]
+  0x286a1400 JavaThread "Code server listener" daemon [_thread_in_native, id=3968, stack(0x28b70000,0x28bc0000)]
+  0x28606800 JavaThread "UnitWriteThread" daemon [_thread_blocked, id=1284, stack(0x28990000,0x289e0000)]
+  0x28516c00 JavaThread "Thread-1" daemon [_thread_blocked, id=5036, stack(0x28390000,0x283e0000)]
+  0x284f4400 JavaThread "Thread-0" [_thread_in_native, id=6236, stack(0x28430000,0x28480000)]
+  0x2774ac00 JavaThread "Service Thread" daemon [_thread_blocked, id=3188, stack(0x28050000,0x280a0000)]
+  0x2774a400 JavaThread "C1 CompilerThread0" daemon [_thread_blocked, id=5836, stack(0x282f0000,0x28340000)]
+  0x2773b400 JavaThread "JDWP Command Reader" daemon [_thread_in_native, id=4984, stack(0x27990000,0x279e0000)]
+  0x27732800 JavaThread "JDWP Event Helper Thread" daemon [_thread_blocked, id=5628, stack(0x28140000,0x28190000)]
+  0x27728400 JavaThread "JDWP Transport Listener: dt_socket" daemon [_thread_blocked, id=520, stack(0x281f0000,0x28240000)]
+  0x27721400 JavaThread "Attach Listener" daemon [_thread_blocked, id=2444, stack(0x27c10000,0x27c60000)]
+  0x27720000 JavaThread "Signal Dispatcher" daemon [_thread_blocked, id=4588, stack(0x27b70000,0x27bc0000)]
+  0x276cbc00 JavaThread "Finalizer" daemon [_thread_blocked, id=4420, stack(0x27ac0000,0x27b10000)]
+  0x276c6c00 JavaThread "Reference Handler" daemon [_thread_blocked, id=1064, stack(0x27930000,0x27980000)]
+  0x003cb400 JavaThread "main" [_thread_blocked, id=4108, stack(0x01440000,0x01490000)]
+
+Other Threads:
+=>0x0158fc00 VMThread [stack: 0x013d0000,0x01420000] [id=6936]
+  0x2774b800 WatcherThread [stack: 0x284a0000,0x284f0000] [id=6176]
+
+VM state:at safepoint (normal execution)
+
+VM Mutex/Monitor currently owned by a thread:  ([mutex/lock_event])
+[0x003c8cf0] Threads_lock - owner thread: 0x0158fc00
+[0x003c9100] Heap_lock - owner thread: 0x27763400
+
+Heap
+ def new generation   total 30272K, used 30272K [0x03590000, 0x05660000, 0x0e030000)
+  eden space 26944K, 100% used [0x03590000, 0x04fe0000, 0x04fe0000)
+  from space 3328K, 100% used [0x05320000, 0x05660000, 0x05660000)
+  to   space 3328K,   0% used [0x04fe0000, 0x04fe0000, 0x05320000)
+ tenured generation   total 67592K, used 67591K [0x0e030000, 0x12232000, 0x23590000)
+   the space 67592K,  99% used [0x0e030000, 0x12231ff8, 0x12232000, 0x12232000)
+ compacting perm gen  total 16680K, used 16616K [0x23590000, 0x245da000, 0x27590000)
+   the space 16680K,  99% used [0x23590000, 0x245ca340, 0x245ca400, 0x245da000)
+No shared spaces configured.
+
+Code Cache  [0x01590000, 0x01910000, 0x03590000)
+ total_blobs=1779 nmethods=1617 adapters=105 free_code_cache=29193Kb largest_free_block=29888896
+
+Dynamic libraries:
+0x01390000 - 0x013bf000 	C:\Program Files\Java\jre7\bin\javaw.exe
+0x776b0000 - 0x777ec000 	C:\Windows\SYSTEM32\ntdll.dll
+0x764e0000 - 0x765b4000 	C:\Windows\system32\kernel32.dll
+0x75ac0000 - 0x75b0a000 	C:\Windows\system32\KERNELBASE.dll
+0x77610000 - 0x776b0000 	C:\Windows\system32\ADVAPI32.dll
+0x75b90000 - 0x75c3c000 	C:\Windows\system32\msvcrt.dll
+0x767b0000 - 0x767c9000 	C:\Windows\SYSTEM32\sechost.dll
+0x76910000 - 0x769b1000 	C:\Windows\system32\RPCRT4.dll
+0x765c0000 - 0x76689000 	C:\Windows\system32\USER32.dll
+0x762d0000 - 0x7631e000 	C:\Windows\system32\GDI32.dll
+0x762c0000 - 0x762ca000 	C:\Windows\system32\LPK.dll
+0x76870000 - 0x7690d000 	C:\Windows\system32\USP10.dll
+0x74550000 - 0x746ee000 	C:\Windows\WinSxS\x86_microsoft.windows.common-controls_6595b64144ccf1df_6.0.7601.17514_none_41e6975e2bd6f2b2\COMCTL32.dll
+0x767d0000 - 0x76827000 	C:\Windows\system32\SHLWAPI.dll
+0x777f0000 - 0x7780f000 	C:\Windows\system32\IMM32.DLL
+0x75ec0000 - 0x75f8c000 	C:\Windows\system32\MSCTF.dll
+0x69a30000 - 0x69aee000 	C:\Program Files\Java\jre7\bin\msvcr100.dll
+0x60f60000 - 0x61288000 	C:\Program Files\Java\jre7\bin\client\jvm.dll
+0x6f1c0000 - 0x6f1c7000 	C:\Windows\system32\WSOCK32.dll
+0x778a0000 - 0x778d5000 	C:\Windows\system32\WS2_32.dll
+0x76860000 - 0x76866000 	C:\Windows\system32\NSI.dll
+0x73850000 - 0x73882000 	C:\Windows\system32\WINMM.dll
+0x761c0000 - 0x761c5000 	C:\Windows\system32\PSAPI.DLL
+0x67190000 - 0x6719c000 	C:\Program Files\Java\jre7\bin\verify.dll
+0x67080000 - 0x670a0000 	C:\Program Files\Java\jre7\bin\java.dll
+0x6a090000 - 0x6a0ba000 	C:\Program Files\Java\jre7\bin\jdwp.dll
+0x70c70000 - 0x70c77000 	C:\Program Files\Java\jre7\bin\npt.dll
+0x66eb0000 - 0x66ec3000 	C:\Program Files\Java\jre7\bin\zip.dll
+0x70db0000 - 0x70db8000 	C:\Program Files\Java\jre7\bin\dt_socket.dll
+0x73e50000 - 0x73e60000 	C:\Windows\system32\NLAapi.dll
+0x70c40000 - 0x70c50000 	C:\Windows\system32\napinsp.dll
+0x70c20000 - 0x70c32000 	C:\Windows\system32\pnrpnsp.dll
+0x712e0000 - 0x71301000 	C:\Program Files\Bonjour\mdnsNSP.dll
+0x73c10000 - 0x73c2c000 	C:\Windows\system32\Iphlpapi.DLL
+0x73bf0000 - 0x73bf7000 	C:\Windows\system32\WINNSI.DLL
+0x75280000 - 0x752bc000 	C:\Windows\System32\mswsock.dll
+0x75140000 - 0x75184000 	C:\Windows\system32\DNSAPI.dll
+0x70c10000 - 0x70c18000 	C:\Windows\System32\winrnr.dll
+0x73b70000 - 0x73ba8000 	C:\Windows\System32\fwpuclnt.dll
+0x71130000 - 0x71136000 	C:\Windows\system32\rasadhlp.dll
+0x74dd0000 - 0x74dd5000 	C:\Windows\System32\wshtcpip.dll
+0x66e90000 - 0x66ea4000 	C:\Program Files\Java\jre7\bin\net.dll
+0x75270000 - 0x75276000 	C:\Windows\System32\wship6.dll
+0x752c0000 - 0x752d6000 	C:\Windows\system32\CRYPTSP.dll
+0x75060000 - 0x7509b000 	C:\Windows\system32\rsaenh.dll
+0x74ea0000 - 0x74eb7000 	C:\Windows\system32\USERENV.dll
+0x75840000 - 0x7584b000 	C:\Windows\system32\profapi.dll
+0x757c0000 - 0x757cc000 	C:\Windows\system32\CRYPTBASE.dll
+0x67600000 - 0x67609000 	C:\Users\ssonam\Documents\eclipse\plugins\com.google.gwt.eclipse.sdkbundle_2.4.0.v201203300216-rel-r37\gwt-2.4.0\gwt-ll.dll
+0x75c40000 - 0x75d5b000 	C:\Windows\system32\wininet.dll
+0x761d0000 - 0x761d3000 	C:\Windows\system32\Normaliz.dll
+0x76320000 - 0x764d8000 	C:\Windows\system32\iertutil.dll
+0x76690000 - 0x767a1000 	C:\Windows\system32\urlmon.dll
+0x75d60000 - 0x75ebc000 	C:\Windows\system32\ole32.dll
+0x77810000 - 0x7789f000 	C:\Windows\system32\OLEAUT32.dll
+0x75710000 - 0x75718000 	C:\Windows\system32\Secur32.dll
+0x75750000 - 0x7576b000 	C:\Windows\system32\SSPICLI.DLL
+0x769c0000 - 0x7760a000 	C:\Windows\system32\SHELL32.dll
+0x67180000 - 0x6718f000 	C:\Program Files\Java\jre7\bin\nio.dll
+0x73750000 - 0x737a2000 	C:\Windows\system32\RASAPI32.dll
+0x73730000 - 0x73745000 	C:\Windows\system32\rasman.dll
+0x73720000 - 0x7372d000 	C:\Windows\system32\rtutils.dll
+0x6e240000 - 0x6e246000 	C:\Windows\system32\sensapi.dll
+0x74970000 - 0x74991000 	C:\Windows\system32\ntmarta.dll
+0x75b40000 - 0x75b85000 	C:\Windows\system32\WLDAP32.dll
+0x74d40000 - 0x74d49000 	C:\Windows\system32\VERSION.dll
+0x6e1e0000 - 0x6e1f4000 	C:\Windows\system32\jsproxy.dll
+0x75f90000 - 0x76013000 	C:\Windows\system32\CLBCatQ.DLL
+0x6e120000 - 0x6e1d2000 	C:\Windows\System32\jscript.dll
+0x75830000 - 0x7583e000 	C:\Windows\system32\RpcRtRemote.dll
+0x66e70000 - 0x66e90000 	C:\Program Files\Java\jre7\bin\sunec.dll
+0x70c50000 - 0x70c59000 	C:\Program Files\Java\jre7\bin\sunmscapi.dll
+0x758c0000 - 0x759de000 	C:\Windows\system32\CRYPT32.dll
+0x758b0000 - 0x758bc000 	C:\Windows\system32\MSASN1.dll
+
+VM Arguments:
+jvm_args: -agentlib:jdwp=transport=dt_socket,suspend=y,address=localhost:57148 -Xmx512m -Dfile.encoding=Cp1252 
+java_command: com.google.gwt.dev.DevMode -remoteUI 51569:14335723425832 -startupUrl Mvp4gtest.html -logLevel INFO -codeServerPort 9997 -port 8888 -war C:\Users\ssonam\Desktop\work\gwtUI\war de.bbcdaas.opendata.gwt.mvp4gtest
+Launcher Type: SUN_STANDARD
+
+Environment Variables:
+PATH=C:/Program Files/Java/jre7/bin/client;C:/Program Files/Java/jre7/bin;C:/Program Files/Java/jre7/lib/i386;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Users\ssonam\Documents\eclipse;
+USERNAME=ssonam
+OS=Windows_NT
+PROCESSOR_IDENTIFIER=x86 Family 6 Model 15 Stepping 11, GenuineIntel
+
+
+
+---------------  S Y S T E M  ---------------
+
+OS: Windows 7 Build 7601 Service Pack 1
+
+CPU:total 4 (4 cores per cpu, 1 threads per core) family 6 model 15 stepping 11, cmov, cx8, fxsr, mmx, sse, sse2, sse3, ssse3
+
+Memory: 4k page, physical 3798688k(1351968k free), swap 3996032k(917228k free)
+
+vm_info: Java HotSpot(TM) Client VM (22.1-b02) for windows-x86 JRE (1.7.0_03-b05), built on Feb  3 2012 20:43:37 by "java_re" with unknown MS VC++:1600
+
+time: Thu Jun 28 17:36:26 2012
+elapsed time: 883 seconds
+

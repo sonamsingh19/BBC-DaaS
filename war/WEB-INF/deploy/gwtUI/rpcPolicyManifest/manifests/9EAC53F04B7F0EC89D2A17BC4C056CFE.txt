@@ -1,0 +1,2 @@
+serviceClass: de.bbcdaas.opendata.gwt.client.services.IUserService
+path: 64723E1BF079E8190717F900F5616BE0.gwt.rpc
