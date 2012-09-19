@@ -12,8 +12,8 @@ C:\Program Files\Apache Software Foundation\Tomcat 7.0\webapps
 5)run application from browser using url:
 http://localhost:8080/gwtUI/gwtUI.html
 
-Note:You may need to resart tomcat after pasting war file.
+Note:You may need to restart tomcat after pasting war file.
 
-A sampel dataset(csv is uploaded too).
+A sample dataset(csv is uploaded too).
 
-v1
+v3
