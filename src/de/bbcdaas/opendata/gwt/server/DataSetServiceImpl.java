@@ -35,7 +35,7 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 		case DOWNLOADS:
 
 			List<DataSetInfo> list = getSubList(
-					SortByDownloads(DataSets.dataSetsInfos), start, length);
+				DataSets.dataSetsInfos, start, length);
 			resultArrayList = getArrayList(list);
 			break;
 		case LATEST:
@@ -237,20 +237,25 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 		dataSet.setColumns(columns);
 		dataSet.setData(data);
 
-		setsomeData(dataSet);
+		putDatasetinStaticMemory(dataSet);
 		return dataSet;
 
 	}
-
-	private void setsomeData(DataSet dataSet) {
+	private void putDatasetinStaticMemory(DataSet dataSet) {
 
 		DataSets.dataSets.put(dataSet.getId(), dataSet);
-		DataSetInfo dataSetInfo = new DataSetInfo(dataSet.getName(), 1900,
-				Calendar.getInstance().getTime());
-		dataSetInfo.setId(dataSet.getId());
-		dataSetInfo.setName(dataSet.getName());
+		
+	}
+
+	@Override
+	public void setDatasetInfo(String id, DataSet dataset) {
+		
+		DataSetInfo dataSetInfo = new DataSetInfo(dataset
+				.getName(), 1900);
+		dataSetInfo.setId(dataset.getId());
+		dataSetInfo.setName(dataset.getName());
 		DataSets.dataSetsInfos.add(dataSetInfo);
-		// / Send a customized message to the client.
 
 	}
+
 }

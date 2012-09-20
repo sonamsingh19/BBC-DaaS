@@ -40,6 +40,9 @@ public interface IDataSetServiceAsync {
 	void parseFile(String fileUrl, char delimiter,
 			AsyncCallback<DataSet> callback);
 
+	void setDatasetInfo(String id, DataSet datasetInfo,
+			AsyncCallback<Void> callback);
+
 	
 
 }

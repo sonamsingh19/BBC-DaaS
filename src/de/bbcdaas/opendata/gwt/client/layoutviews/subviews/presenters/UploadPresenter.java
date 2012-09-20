@@ -2,11 +2,12 @@ package de.bbcdaas.opendata.gwt.client.layoutviews.subviews.presenters;
 
 import gwtupload.client.IUploadStatus.Status;
 import gwtupload.client.IUploader;
+import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.UploadedInfo;
 import gwtupload.client.Uploader;
 
 import java.util.ArrayList;
-
+import java.util.Calendar;
 import java.util.HashMap;
 
 import com.google.gwt.core.client.GWT;
@@ -14,7 +15,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
-import com.google.gwt.user.client.ui.Widget;
 import com.google.inject.Inject;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.BasePresenter;
@@ -22,6 +22,7 @@ import com.mvp4g.client.presenter.BasePresenter;
 import de.bbcdaas.opendata.gwt.client.AppEventBus;
 import de.bbcdaas.opendata.gwt.client.layoutviews.subviews.UploadView;
 import de.bbcdaas.opendata.gwt.client.layoutviews.subviews.interfaces.IUploadView;
+
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.AutoSuggestForm;
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.DataDescriptionWidget;
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.KeyValueScreen;
@@ -51,6 +52,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 	DataDescriptionWidget dataDescriptionWidget;
 	KeyValueScreen keyValueScreen;
 	String fileUrl;
+	DataSet dataset;
 
 	@Override
 	public void bind() {
@@ -89,7 +91,6 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 
 			}
 
-		
 		});
 
 		setHeaderScreen.getSaveClickHandlers().addClickHandler(
@@ -100,37 +101,40 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 
 						loadDescriptionScreen();
 					}
+
 				});
 
 		// Add a finish handler which will load the image once the upload
 		// finishes
 		uploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+
 	}
+
 	private void parseFile(char delimiter) {
-		eventBus.appLoading(false,view.getViewAsWidget());
-				dataServiceAsync.parseFile(fileUrl, delimiter,
-						new AsyncCallback<DataSet>() {
+		eventBus.appLoading(false, view.getViewAsWidget());
+		dataServiceAsync.parseFile(fileUrl, delimiter,
+				new AsyncCallback<DataSet>() {
 
-							@Override
-							public void onFailure(Throwable caught) {
-								// TODO Auto-generated method stub
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
 
-							}
+					}
 
-							@Override
-							public void onSuccess(DataSet result) {
-								
-								dataSetId = result.getId();
+					@Override
+					public void onSuccess(DataSet result) {
 
-								eventBus.appLoading(true,view.getViewAsWidget());
-								
-								loadHeaderScreen(dataSetId);
-							}
+						dataSetId = result.getId();
 
-						});
-				
-			}
-	
+						dataset = result;
+						eventBus.appLoading(true, view.getViewAsWidget());
+
+						loadHeaderScreen(dataSetId);
+
+					}
+				});
+
+	}
 
 	protected void loadDescriptionScreen() {
 
@@ -186,8 +190,15 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 					@Override
 					public void onClick(ClickEvent event) {
 						publishDataSet();
+						dataset.setName(dataDescriptionWidget.getName());
+
+						putDatasetInfoStatic(dataset);
 
 					}
+
+					
+
+				
 				});
 
 		eventBus.appLoading(false, view.getViewAsWidget());
@@ -199,7 +210,22 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 		eventBus.appLoading(true, view.getViewAsWidget());
 
 	}
+private void putDatasetInfoStatic(DataSet dataset) {
+						dataServiceAsync.setDatasetInfo(dataSetId, dataset, new AsyncCallback<Void>() {
 
+							@Override
+							public void onFailure(Throwable caught) {
+								// TODO Auto-generated method stub
+								
+							}
+
+							@Override
+							public void onSuccess(Void result) {
+								
+							}
+						});
+						
+					}
 	protected void publishDataSet() {
 
 		ArrayList<String> tags = dataDescriptionWidget.getTags();
@@ -226,6 +252,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 						clearFields();
 
 					}
+
 				});
 		loadKeyValueScreen();
 
@@ -292,7 +319,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 
 					@Override
 					public void onFailure(Throwable caught) {
-						
+
 					}
 				});
 

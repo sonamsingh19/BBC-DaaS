@@ -4,6 +4,7 @@ import java.util.Date;
 
 import com.google.gwt.user.client.rpc.IsSerializable;
 
+
 public class DataSetInfo implements IsSerializable {
 	public String getId() {
 		return id;
@@ -22,19 +23,21 @@ public class DataSetInfo implements IsSerializable {
 	int downloads;
 	Date datePosted;
 
+	//TODO:fix  uplaoded time
 	public Date getDatePosted() {
-		return datePosted;
+	return null;
+		//return datePosted;
 	}
 
 	public void setDatePosted(Date datePosted) {
 		this.datePosted = datePosted;
 	}
 
-	public DataSetInfo(String name, int downloads, Date datePosted) {
+	//TODO:Implement date logic
+	public DataSetInfo(String name, int downloads) {
 
 		this.name = name;
 		this.downloads = downloads;
-		this.datePosted = datePosted;
 	}
 
 	public DataSetInfo() {
