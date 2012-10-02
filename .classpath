@@ -3,7 +3,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" output="test-classes" path="test"/>
 	<classpathentry kind="con" path="com.google.gwt.eclipse.core.GWT_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="lib" path="Lib/aopalliance.jar"/>
 	<classpathentry kind="lib" path="Lib/gin-1.5-post-gwt-2.2.jar"/>
 	<classpathentry kind="lib" path="Lib/guice-assistedinject-snapshot.jar"/>
@@ -34,5 +33,6 @@
 	<classpathentry kind="lib" path="Lib/lambdaj-2.4-with-dependencies.jar"/>
 	<classpathentry kind="lib" path="Lib/OpenCSV.jar"/>
 	<classpathentry kind="lib" path="Lib/tagcloud_0.4.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/CDC-1.0%Foundation-1.0"/>
 	<classpathentry kind="output" path="war/WEB-INF/classes"/>
 </classpath>

@@ -36,4 +36,5 @@ public interface IDataSetService extends RemoteService {
 	public DataSet parseFile(String fileUrl,char delimiter);
 	
 	public void setDatasetInfo(String id,DataSet datasetInfo);
+
 }
