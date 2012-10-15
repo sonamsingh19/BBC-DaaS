@@ -7,6 +7,6 @@ import com.google.gwt.resources.client.ImageResource;
 public interface Resources extends ClientBundle {
 	public static final Resources INSTANCE = GWT.create(Resources.class);
 
-	@Source("icons/upload.jpg")
+	@Source("upload.jpg")
 	ImageResource uploadBtnIcon();
 }

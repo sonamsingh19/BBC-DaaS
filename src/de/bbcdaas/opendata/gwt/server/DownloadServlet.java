@@ -1,11 +1,13 @@
 package de.bbcdaas.opendata.gwt.server;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -14,10 +16,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import au.com.bytecode.opencsv.CSVReader;
+import au.com.bytecode.opencsv.CSVWriter;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver;
 
+import de.bbcdaas.opendata.gwt.shared.DataSet;
+import de.bbcdaas.opendata.gwt.shared.DataSetColumn;
+import de.bbcdaas.opendata.gwt.shared.DataSets;
 import de.bbcdaas.opendata.gwt.shared.DownloadFormats;
 
 public class DownloadServlet extends HttpServlet {
@@ -42,23 +48,36 @@ public class DownloadServlet extends HttpServlet {
 		case CSV: {
 			resp.addHeader("Content-Disposition", "attachment;filename="
 					+ datasetId + ".csv");
-			FileInputStream fIn = new FileInputStream(fileName);
-			byte[] buffer = new byte[4096];
-			int length;
-			while ((length = fIn.read(buffer)) > 0) {
-				out.write(buffer, 0, length);
+		
+			List<ArrayList<String>> csvLines=getCSVFormat(datasetId)	;	
+			String separator=",";
+			String fileString="";
+			 for (int i = 0; i < csvLines.size(); i++) {
+			    ArrayList<String> row=	csvLines.get(i);
+			    String rowString="";
+			    for (String value : row) {
+				rowString=rowString+value+separator;
+				}
+			   rowString= rowString.substring(0, rowString.length()-separator.length());
+			    fileString=fileString+rowString;
+
+			    System.out.println(rowString);
+		
 			}
-			fIn.close();
+		
+				out.write(fileString.getBytes());
+			
+			
 		}
 
 			break;
 		case XML: {
 			resp.addHeader("Content-Disposition", "attachment;filename="
 					+ datasetId + ".xml");
-			List<String[]> entries = readCSV(fileName);
+			List<ArrayList<String>> entries = getCSVFormat(datasetId);
 
 			XStream xStream = new XStream();
-			
+
 			String xml = xStream.toXML(entries);
 
 			out.write(xml.getBytes());
@@ -70,14 +89,14 @@ public class DownloadServlet extends HttpServlet {
 		{
 			resp.addHeader("Content-Disposition", "attachment;filename="
 					+ datasetId + ".json");
-			
-			List<String[]> entries = readCSV(fileName);
 
-		  XStream xstream = new XStream(new JettisonMappedXmlDriver());
-		        xstream.setMode(XStream.NO_REFERENCES);
-		    
-		    String json = xstream.toXML(entries);		
-		       
+			List<ArrayList<String>> entries = getCSVFormat(datasetId);
+
+			XStream xstream = new XStream(new JettisonMappedXmlDriver());
+			xstream.setMode(XStream.NO_REFERENCES);
+
+			String json = xstream.toXML(entries);
+
 			out.write(json.getBytes());
 		}
 			break;
@@ -90,7 +109,6 @@ public class DownloadServlet extends HttpServlet {
 
 	}
 
-
 	private List<String[]> readCSV(String fileName) throws IOException {
 		FileInputStream fstream = new FileInputStream(fileName);
 
@@ -99,5 +117,19 @@ public class DownloadServlet extends HttpServlet {
 
 		CSVReader reader = new CSVReader(br);
 		return reader.readAll();
+	}
+
+	private List<ArrayList<String>> getCSVFormat(String datasetId) {
+		List<ArrayList<String>> csvLines = new ArrayList<ArrayList<String>>();
+		DataSet dataSet = DataSets.dataSets.get(datasetId);
+		ArrayList<DataSetColumn> columns = dataSet.getColumns();
+		DataSetServiceImpl dataSetServiceImpl = new DataSetServiceImpl();
+		ArrayList<String> datasetCols = new ArrayList<String>();
+		for (int i = 0; i < columns.size(); i++) {
+			datasetCols.add(columns.get(i).getName());
+		}
+		csvLines.add(datasetCols);
+		csvLines.addAll(dataSetServiceImpl.convertToRowWise(dataSet));
+		return csvLines;
 	}
 }

@@ -137,7 +137,6 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 					rowArrayList.add(temp);
 				}
 
-				System.out.print(i);System.out.println(j);
 				rowArrayList.get(j).add(colwisewRow.get(j));
 
 			}

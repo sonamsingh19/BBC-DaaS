@@ -18,11 +18,11 @@
 					<g:VerticalPanel>
 						<g:Label text="         Share"/>
 						<g:HorizontalPanel spacing="10" height="39px" width="34px">
-							<g:Image url="gwtUI/gwt/clean/images/icons/facebookIcon.jpg" height="33px"/>
-							<g:Image url="gwtUI/gwt/clean/images/icons/twitterIcon.png" height="34px"/>
-							<g:Image url="gwtUI/gwt/clean/images/icons/googlePlus.jpg" height="35px"/>
-							<g:Image url="gwtUI/gwt/clean/images/icons/ratingIcon.jpg" height="37px"/>
-							<g:Image url="gwtUI/gwt/clean/images/icons/discussIcon.jpg" height="35px"/>
+							<g:Image url="icons/facebookIcon.jpg" height="33px"/>
+							<g:Image url="icons/twitterIcon.png" height="34px"/>
+							<g:Image url="icons/googlePlus.jpg" height="35px"/>
+							<g:Image url=" icons/ratingIcon.jpg" height="37px"/>
+							<g:Image url=" icons/discussIcon.jpg" height="35px"/>
 						</g:HorizontalPanel>
 					</g:VerticalPanel>
 				</g:HorizontalPanel>

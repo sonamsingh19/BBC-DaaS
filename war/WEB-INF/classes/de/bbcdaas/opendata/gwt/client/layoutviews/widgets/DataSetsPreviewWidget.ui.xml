@@ -21,7 +21,7 @@
 					<g:Anchor text="Advanced Search" ui:field="anchor" addStyleNames="{style.anchor}"/>
 				</g:VerticalPanel>
 				<p1:ImageButton styleName="imageBtn" text="Search" ui:field="goSearch"/>
-				<g:Image url="gwtUI/gwt/clean/images/icons/microfone.jpg" height="38px" width="41px"/>
+				<g:Image url="icons/microfone.jpg" height="38px" width="41px"/>
 				
 					<p1:ImageButton  styleName="imageBtn" ui:field="refreshBtn" text="refresh"/>
 				<p1:ImageButton  styleName="imageBtn" text="Query" ui:field="queryBtn"/>

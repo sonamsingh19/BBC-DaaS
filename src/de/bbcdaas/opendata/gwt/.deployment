@@ -1,0 +1,5 @@
+#Mon Oct 15 12:10:49 CEST 2012
+war.name=ROOT.war
+compiler.style=OBFUSCATED
+server.path=C\:\\Users\\Sonam\\Desktop\\deployables
+compiler.memory.max=512m

@@ -53,7 +53,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 	KeyValueScreen keyValueScreen;
 	String fileUrl;
 	DataSet dataset;
-
+	AutoSuggestForm autoSuggestForm;
 	@Override
 	public void bind() {
 
@@ -67,7 +67,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 
 			@Override
 			public void onSuccess(HashMap<String, Integer> result) {
-				AutoSuggestForm autoSuggestForm = new AutoSuggestForm(result
+				 autoSuggestForm = new AutoSuggestForm(result
 						.keySet());
 				dataDescriptionWidget = new DataDescriptionWidget(
 						autoSuggestForm);
@@ -196,9 +196,6 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 
 					}
 
-					
-
-				
 				});
 
 		eventBus.appLoading(false, view.getViewAsWidget());
@@ -210,22 +207,25 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 		eventBus.appLoading(true, view.getViewAsWidget());
 
 	}
-private void putDatasetInfoStatic(DataSet dataset) {
-						dataServiceAsync.setDatasetInfo(dataSetId, dataset, new AsyncCallback<Void>() {
 
-							@Override
-							public void onFailure(Throwable caught) {
-								// TODO Auto-generated method stub
-								
-							}
+	private void putDatasetInfoStatic(DataSet dataset) {
+		dataServiceAsync.setDatasetInfo(dataSetId, dataset,
+				new AsyncCallback<Void>() {
 
-							@Override
-							public void onSuccess(Void result) {
-								
-							}
-						});
-						
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+
 					}
+
+					@Override
+					public void onSuccess(Void result) {
+
+					}
+				});
+
+	}
+
 	protected void publishDataSet() {
 
 		ArrayList<String> tags = dataDescriptionWidget.getTags();
@@ -293,7 +293,7 @@ private void putDatasetInfoStatic(DataSet dataset) {
 						ArrayList<KeyValueWidget> keyValueWidgets = keyValueScreen
 								.getAllIKeyValueWidgets();
 						eventBus.goToHomepage();
-
+					clearData();
 					}
 				});
 
@@ -301,6 +301,14 @@ private void putDatasetInfoStatic(DataSet dataset) {
 
 	protected void clearFields() {
 		uploadWidget.getUploader().reset();
+		
+	}
+	private void clearData() {
+		contentPanel.clear();
+		contentPanel.add(uploadWidget);
+
+		dataDescriptionWidget=new DataDescriptionWidget(autoSuggestForm);
+
 	}
 
 	protected void loadHeaderScreen(String dataSetId) {

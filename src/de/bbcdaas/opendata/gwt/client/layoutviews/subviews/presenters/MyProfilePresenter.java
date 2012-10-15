@@ -80,6 +80,7 @@ public class MyProfilePresenter extends
 					public void onSuccess(ArrayList<DataSetInfo> result) {
 						myDatasetsWidget.clearDatasets();
 						for (DataSetInfo dataSetInfo : result) {
+							
 							myDatasetsWidget.addDatasets(dataSetInfo);
 
 						}

@@ -9,7 +9,7 @@
 	
 	<g:HTMLPanel width="100%" height="100%">
 		<g:HorizontalPanel>
-		<g:Image url='gwtUI/gwt/clean/images/icons/logo2.png' width="118px" height="89px"/>
+		<g:Image url='icons/logo2.png' width="118px" height="89px"/>
 				<g:VerticalPanel>
 					<g:Anchor ui:field="homePageLink" addStyleNames="{style.anchor}"><span class="threeDHeading">BBC-DaaS</span></g:Anchor>
 					<g:HTML wordWrap="true"><span class="threeDSubheading">Building Blocks of Cloud - Data as a Service</span></g:HTML>
