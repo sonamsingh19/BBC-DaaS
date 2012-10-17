@@ -1,5 +1,4 @@
 *.class
-
 # Package Files #
 *.war
 *.ear
@@ -8,3 +7,4 @@ target
 !.settings/.jsdtscope
 .project
 .classpath
+.gwt
