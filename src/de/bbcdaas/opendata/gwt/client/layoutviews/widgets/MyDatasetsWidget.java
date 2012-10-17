@@ -34,7 +34,7 @@ public class MyDatasetsWidget extends Composite implements IMyDatasets {
 	public void addDatasets(DataSetInfo dataSetInfo) {
 
 		Label label = new Label(dataSetInfo.getName());
-		Label downloadLabel = new Label(dataSetInfo.getDatePosted().toString());
+		Label downloadLabel = new Label(dataSetInfo.getDownloads()+"");
 
 		datasetsTable.setWidget(i, 1, label);
 		datasetsTable.setWidget(i, 2, downloadLabel);
