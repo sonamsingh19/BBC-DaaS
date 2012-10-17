@@ -1,8 +1,8 @@
-= BBC-DaaS =
+# BBC-DaaS
 
 The BBC-DaaS SubProject of http://www.ifaf-berlin.de i.e. Building Blocks for Data as a Service
 
-== Tomcat running guide ==
+## Tomcat running guide
 
 Note:Use Eclipse for now instead of using tomcat war
 
