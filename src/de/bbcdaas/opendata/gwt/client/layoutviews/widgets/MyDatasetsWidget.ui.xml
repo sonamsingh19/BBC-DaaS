@@ -2,12 +2,6 @@
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
 	xmlns:g="urn:import:com.google.gwt.user.client.ui"
 	 xmlns:p1="urn:import:com.google.gwt.user.datepicker.client">
+	<g:VerticalPanel styleName="myprofileView" width="100%" height="100%" ui:field="datasetsPanel"/>
 	
-	<g:HTMLPanel>
-		<g:VerticalPanel styleName="myprofileView" width="100%" height="100%">
-			<g:FlexTable ui:field="datasetsTable" width="100%" height="100%"/>
-		</g:VerticalPanel>
-	
-		
-	</g:HTMLPanel>
 </ui:UiBinder> 

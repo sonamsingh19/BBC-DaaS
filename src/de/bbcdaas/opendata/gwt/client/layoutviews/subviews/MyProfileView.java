@@ -44,4 +44,8 @@ public class MyProfileView extends Composite implements IMyProfileView {
 		return containerPanel;
 	}
 
+
+
+	
+
 }

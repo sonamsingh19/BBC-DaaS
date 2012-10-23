@@ -583,5 +583,9 @@ public class DataSetsPresenter extends
        addWidgetToView((Widget) dataSetPreviewWidget);
 
 	}
+	public void onRefreshDatasets(){
+		  refreshDataSets();
+		    
+	}
 
 }

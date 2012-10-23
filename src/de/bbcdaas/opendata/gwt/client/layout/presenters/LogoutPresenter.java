@@ -1,7 +1,5 @@
 package de.bbcdaas.opendata.gwt.client.layout.presenters;
 
-
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
@@ -24,21 +22,20 @@ public class LogoutPresenter extends BasePresenter<ILogoutView, AppEventBus> {
 	@Inject
 	ILoginServiceAsync loginService;
 
-	
 	@Inject
 	IUserServiceAsync userService;
 
 	@Override
 	public void bind() {
-		String username =CookiesHandler.getCookie(CookieConstants.USERNAME);
+		String username = CookiesHandler.getCookie(CookieConstants.USERNAME);
 		view.getUserNameBox().setText(username);
 
 		view.getAccountClickHandlers().addClickHandler(new ClickHandler() {
-			
+
 			@Override
 			public void onClick(ClickEvent event) {
 				setMyProfileView();
-				
+
 			}
 		});
 		view.getLogoutClickHandlers().addClickHandler(new ClickHandler() {
@@ -52,34 +49,41 @@ public class LogoutPresenter extends BasePresenter<ILogoutView, AppEventBus> {
 	}
 
 	protected void setMyProfileView() {
-		
-		eventBus.setMainBody(view.getMyProfileView(),view.getMyProfileView().getViewName().toString(), MyProfilePresenter.presenterID);
+
+		eventBus.setMainBody(view.getMyProfileView(), view.getMyProfileView()
+				.getViewName().toString(), MyProfilePresenter.presenterID);
+		eventBus.refreshDatasets();
 	}
 
 	private void handleLogout() {
-		loginService.logoutUser(CookiesHandler.getCookie(CookieConstants.USERNAME), new AsyncCallback<Boolean>() {
+		loginService.logoutUser(
+				CookiesHandler.getCookie(CookieConstants.USERNAME),
+				new AsyncCallback<Boolean>() {
 
-			@Override
-			public void onFailure(Throwable caught) {
-				try {
-					throw caught;
-				} catch (Throwable e) {
-					// TODO Auto-generated catch block
+					@Override
+					public void onFailure(Throwable caught) {
+						try {
+							throw caught;
+						} catch (Throwable e) {
+							// TODO Auto-generated catch block
 
-				}
-			}
+						}
+					}
 
-			@Override
-			public void onSuccess(Boolean result) {
+					@Override
+					public void onSuccess(Boolean result) {
 
-				eventBus.userLoggedout(CookiesHandler.getCookie(CookieConstants.USERNAME));
-				CookiesHandler.DeleteCookie(CookieConstants.USERNAME);
-			String usernameString=	CookiesHandler.getCookie(CookieConstants.USERNAME);
-			}
-		});
+						eventBus.userLoggedout(CookiesHandler
+								.getCookie(CookieConstants.USERNAME));
+						CookiesHandler.DeleteCookie(CookieConstants.USERNAME);
+						String usernameString = CookiesHandler
+								.getCookie(CookieConstants.USERNAME);
+					}
+				});
 	}
+
 	public void onUserLoggedin(UserDetails user) {
-		String username =CookiesHandler.getCookie(CookieConstants.USERNAME);
+		String username = CookiesHandler.getCookie(CookieConstants.USERNAME);
 		view.getUserNameBox().setText(username);
 	}
 

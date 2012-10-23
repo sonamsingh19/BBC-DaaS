@@ -14,6 +14,7 @@ import com.mvp4g.client.presenter.BasePresenter;
 import de.bbcdaas.opendata.gwt.client.AppEventBus;
 import de.bbcdaas.opendata.gwt.client.layoutviews.subviews.MyProfileView;
 import de.bbcdaas.opendata.gwt.client.layoutviews.subviews.interfaces.IMyProfileView;
+import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.DispDataSetWidget;
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.MyAccountWidget;
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.MyDatasetsWidget;
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.interfaces.IMyProfileNav;
@@ -59,6 +60,7 @@ public class MyProfilePresenter extends
 
 					}
 				});
+
 		showMyDatasets();
 	}
 
@@ -67,7 +69,7 @@ public class MyProfilePresenter extends
 		containerPanel.clear();
 
 		containerPanel.add(myDatasetsWidget);
-
+        eventBus.appLoading(false, myDatasetsWidget);
 		dataServiceAsync.getDataSets(0, 10, SortingOptions.DOWNLOADS,
 				new AsyncCallback<ArrayList<DataSetInfo>>() {
 
@@ -80,8 +82,34 @@ public class MyProfilePresenter extends
 					public void onSuccess(ArrayList<DataSetInfo> result) {
 						myDatasetsWidget.clearDatasets();
 						for (DataSetInfo dataSetInfo : result) {
-							
-							myDatasetsWidget.addDatasets(dataSetInfo);
+
+							final DispDataSetWidget dispDataSetWidget = myDatasetsWidget
+									.addDatasets(dataSetInfo);
+							dispDataSetWidget.getDeleteBtnClickHandlers()
+									.addClickHandler(new ClickHandler() {
+
+										@Override
+										public void onClick(ClickEvent event) {
+											String datasetId=dispDataSetWidget.getDatasetId();
+											myDatasetsWidget.deleteDataset(datasetId);
+											dataServiceAsync.DeleteDataset(datasetId, new AsyncCallback<Void>() {
+
+												@Override
+												public void onFailure(
+														Throwable caught) {
+													// TODO Auto-generated method stub
+													
+												}
+
+												@Override
+												public void onSuccess(
+														Void result) {
+
+											        eventBus.appLoading(true,myDatasetsWidget);
+												}
+											});
+										}
+									});
 
 						}
 
@@ -96,8 +124,13 @@ public class MyProfilePresenter extends
 		containerPanel.add(myAccountWidget);
 
 	}
+
 	public void onUserLoggedin(UserDetails user) {
 		showMyDatasets();
+	}
+	public void onRefreshDatasets(){
+		showMyDatasets();
+
 	}
 
 }

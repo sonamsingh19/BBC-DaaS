@@ -46,10 +46,15 @@ public interface AppEventBus extends EventBus {
 	@Event(handlers = { RootPresenter.class, TopPresenter.class,
 			MainPresenter.class })
 	public void userLoggedout(String username);
+	
+	@Event(handlers={DataSetsPresenter.class,MyProfilePresenter.class})
+	public void refreshDatasets();
 
 	@InitHistory
 	@Event(handlers = RootPresenter.class)
 	public void init();
+	
+	
 
 	@Event(handlers = { LoginPresenter.class, MainPresenter.class,
 			ContentPanePresenter.class, UploadPresenter.class,

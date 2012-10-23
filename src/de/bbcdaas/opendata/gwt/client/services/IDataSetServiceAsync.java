@@ -43,6 +43,8 @@ public interface IDataSetServiceAsync {
 	void setDatasetInfo(String id, DataSet datasetInfo,
 			AsyncCallback<Void> callback);
 
+	void DeleteDataset(String datasetId, AsyncCallback<Void> callback);
+
 	
 
 }

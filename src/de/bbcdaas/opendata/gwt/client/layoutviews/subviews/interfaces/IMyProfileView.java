@@ -9,4 +9,5 @@ public interface IMyProfileView  {
 	ViewNames getViewName();
 	IMyProfileNav getIMyProfileNav();
 	HasWidgets getContainerPanel();
+
 }

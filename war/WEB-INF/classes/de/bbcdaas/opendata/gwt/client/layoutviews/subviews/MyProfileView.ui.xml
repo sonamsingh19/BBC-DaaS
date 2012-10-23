@@ -4,13 +4,11 @@
 
 	<g:HTMLPanel>
 		<g:HorizontalPanel width="100%" height="100%">
-			<g:Cell>
-				<p1:MyProfileNav ui:field="myProfileNav"/>
+			<g:Cell width="10%" >
+				<p1:MyProfileNav ui:field="myProfileNav"   height="100%"/>
 			</g:Cell>
 			<g:Cell height="100%">
-				<g:HTMLPanel ui:field="containerPanel" width="100%" height="100%">
-					<g:Button/>
-				</g:HTMLPanel>
+				<g:HTMLPanel ui:field="containerPanel" width="100%" height="100%"/>
 			</g:Cell>
 		</g:HorizontalPanel>
 	</g:HTMLPanel>

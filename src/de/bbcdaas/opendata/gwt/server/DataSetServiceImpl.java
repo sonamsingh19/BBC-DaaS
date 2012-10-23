@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
+import java_cup.internal_error;
+
 import au.com.bytecode.opencsv.CSVReader;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
@@ -34,8 +36,8 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 		switch (sortingOption) {
 		case DOWNLOADS:
 
-			List<DataSetInfo> list = getSubList(
-				DataSets.dataSetsInfos, start, length);
+			List<DataSetInfo> list = getSubList(DataSets.dataSetsInfos, start,
+					length);
 			resultArrayList = getArrayList(list);
 			break;
 		case LATEST:
@@ -171,7 +173,7 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 			}
 
 		}
-		
+
 	}
 
 	@Override
@@ -191,7 +193,7 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 		HashMap<String, DataSetValues<String>> data = new HashMap<String, DataSetValues<String>>();
 		try {
 			FileReader fileReader = new FileReader(fileUrl);
-			CSVReader reader = new CSVReader(fileReader,delimiter);
+			CSVReader reader = new CSVReader(fileReader, delimiter);
 			List<String[]> entries = reader.readAll();
 
 			// My CSV Code
@@ -221,7 +223,6 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 				for (int i = 0; i < columns.size(); i++) {
 
 					data.get(columns.get(i).getId()).addValue(values[i]);
-				
 
 				}
 
@@ -240,20 +241,35 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 		return dataSet;
 
 	}
+
 	private void putDatasetinStaticMemory(DataSet dataSet) {
 
 		DataSets.dataSets.put(dataSet.getId(), dataSet);
-		
+
 	}
 
 	@Override
 	public void setDatasetInfo(String id, DataSet dataset) {
-		
-		DataSetInfo dataSetInfo = new DataSetInfo(dataset
-				.getName(), 1900);
+
+		DataSetInfo dataSetInfo = new DataSetInfo(dataset.getName(), 1900);
 		dataSetInfo.setId(dataset.getId());
 		dataSetInfo.setName(dataset.getName());
 		DataSets.dataSetsInfos.add(dataSetInfo);
+
+	}
+
+	@Override
+	public void DeleteDataset(String datasetId) {
+		DataSets.dataSets.remove(datasetId);
+		int index = 0;
+		for (DataSetInfo dataSetInfo : DataSets.dataSetsInfos) {
+			if (dataSetInfo.getId().equalsIgnoreCase(datasetId)) {
+				index = DataSets.dataSetsInfos.indexOf(dataSetInfo);
+				break;
+			}
+		}
+		DataSets.dataSetsInfos.remove(index);
+		DataSets.dataSetDescriptions.remove(datasetId);
 
 	}
 
