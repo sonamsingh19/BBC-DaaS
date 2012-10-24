@@ -1,7 +1,5 @@
 package de.bbcdaas.opendata.gwt.client.layoutviews.subviews.presenters;
 
-
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -186,7 +184,7 @@ public class DataSetsPresenter extends
 
 				TagCloud tagCloud = new TagCloud();
 				tagCloud.setColored(true);
-				int i=0;
+				int i = 0;
 				for (String key : result.keySet()) {
 					int frequency = result.get(key);
 					String word = key;
@@ -194,10 +192,11 @@ public class DataSetsPresenter extends
 					tag.setNumberOfOccurences(frequency);
 					String link = Window.Location.getPath();
 					tag.setLink(link);
-  
-					if((i%3)==0) tag.setOrientation(2);
+
+					if ((i % 3) == 0)
+						tag.setOrientation(2);
 					tagCloud.addWord(tag);
-			i=i+3;
+					i = i + 3;
 
 				}
 				dataSetPreviewWidget.getTagPanel().clear();
@@ -222,7 +221,6 @@ public class DataSetsPresenter extends
 
 				datasetsCount = result;
 				dataSetPreviewWidget.setProvider(provider, datasetsCount);
-
 			}
 		});
 
@@ -452,23 +450,23 @@ public class DataSetsPresenter extends
 		DomEvent.fireNativeEvent(Document.get().createChangeEvent(),
 				filterScreen.getDownloadTypeLB());
 		filterScreen.setDataSetName(dataSet.getName());
-		
-		dataServiceAsync.getDescription(dataSet.getId(), new AsyncCallback<DataSetDescription>() {
 
-			@Override
-			public void onFailure(Throwable caught) {
-				// TODO Auto-generated method stub
-				
-			}
+		dataServiceAsync.getDescription(dataSet.getId(),
+				new AsyncCallback<DataSetDescription>() {
 
-			@Override
-			public void onSuccess(DataSetDescription result) {
-					filterScreen.setMetadata(result);
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
 
-				
-			}
-		});
-	
+					}
+
+					@Override
+					public void onSuccess(DataSetDescription result) {
+						filterScreen.setMetadata(result);
+
+					}
+				});
+
 		CellTable<ArrayList<String>> datasetTable = dataSetWidget
 				.getCellTable();
 
@@ -545,6 +543,7 @@ public class DataSetsPresenter extends
 
 	protected void refreshDataSets() {
 		dataSetPreviewWidget.refresh();
+
 		setTagCloud();
 
 	}
@@ -578,14 +577,27 @@ public class DataSetsPresenter extends
 		 * showDataSet(dataSetId); } }
 		 */
 	}
+
 	public void onGoToHomepage() {
-       refreshDataSets();
-       addWidgetToView((Widget) dataSetPreviewWidget);
+		refreshDataSets();
+		dataServiceAsync.getDataSetCount(new AsyncCallback<Integer>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void onSuccess(Integer result) {
+             
+				provider.updateRowCount(result,true);
+
+			}
+		});
 
 	}
-	public void onRefreshDatasets(){
-		  refreshDataSets();
-		    
-	}
+
+	
 
 }

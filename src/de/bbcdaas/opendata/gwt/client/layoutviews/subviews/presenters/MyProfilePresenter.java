@@ -7,6 +7,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
+import com.google.gwt.user.client.ui.Label;
 import com.google.inject.Inject;
 import com.mvp4g.client.annotation.Presenter;
 import com.mvp4g.client.presenter.BasePresenter;
@@ -40,8 +41,8 @@ public class MyProfilePresenter extends
 		this.myDatasetsWidget = GWT.create(MyDatasetsWidget.class);
 		this.myAccountWidget = GWT.create(MyAccountWidget.class);
 		IMyProfileNav myProfileNav = view.getIMyProfileNav();
-
-		myProfileNav.getMyAccountClickHandlers().addClickHandler(
+	    setDefaultWidget();
+  		myProfileNav.getMyAccountClickHandlers().addClickHandler(
 				new ClickHandler() {
 
 					@Override
@@ -64,12 +65,20 @@ public class MyProfilePresenter extends
 		showMyDatasets();
 	}
 
+	private void setDefaultWidget() {
+		Label label=new Label();
+		label.setText("No Datasets Uploaded");
+	    myDatasetsWidget.setDefaultWidget(label);
+		
+	}
+
 	protected void showMyDatasets() {
 
 		containerPanel.clear();
 
 		containerPanel.add(myDatasetsWidget);
-        eventBus.appLoading(false, myDatasetsWidget);
+		eventBus.appLoading(false, myDatasetsWidget);
+		
 		dataServiceAsync.getDataSets(0, 10, SortingOptions.DOWNLOADS,
 				new AsyncCallback<ArrayList<DataSetInfo>>() {
 
@@ -80,7 +89,10 @@ public class MyProfilePresenter extends
 
 					@Override
 					public void onSuccess(ArrayList<DataSetInfo> result) {
+				        eventBus.appLoading(true,myDatasetsWidget);
+						
 						myDatasetsWidget.clearDatasets();
+						
 						for (DataSetInfo dataSetInfo : result) {
 
 							final DispDataSetWidget dispDataSetWidget = myDatasetsWidget
@@ -105,7 +117,6 @@ public class MyProfilePresenter extends
 												public void onSuccess(
 														Void result) {
 
-											        eventBus.appLoading(true,myDatasetsWidget);
 												}
 											});
 										}

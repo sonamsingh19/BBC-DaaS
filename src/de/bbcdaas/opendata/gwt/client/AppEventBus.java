@@ -47,7 +47,7 @@ public interface AppEventBus extends EventBus {
 			MainPresenter.class })
 	public void userLoggedout(String username);
 	
-	@Event(handlers={DataSetsPresenter.class,MyProfilePresenter.class})
+	@Event(handlers=MyProfilePresenter.class)
 	public void refreshDatasets();
 
 	@InitHistory

@@ -20,6 +20,7 @@ public class MyDatasetsWidget extends Composite implements IMyDatasets {
 	VerticalPanel datasetsPanel;
 
 	HashMap<String, DispDataSetWidget> dispDataSetWidgets;
+	Widget defaultWidget;
 
 	interface MyDatasetsWidgetUiBinder extends
 			UiBinder<Widget, MyDatasetsWidget> {
@@ -27,7 +28,8 @@ public class MyDatasetsWidget extends Composite implements IMyDatasets {
 
 	public MyDatasetsWidget() {
 		initWidget(uiBinder.createAndBindUi(this));
-		dispDataSetWidgets=new HashMap<String, DispDataSetWidget>();
+		dispDataSetWidgets = new HashMap<String, DispDataSetWidget>();
+		this.defaultWidget = new Widget();
 	}
 
 	@Override
@@ -46,6 +48,7 @@ public class MyDatasetsWidget extends Composite implements IMyDatasets {
 	@Override
 	public void clearDatasets() {
 		datasetsPanel.clear();
+		datasetsPanel.add(defaultWidget);
 
 	}
 
@@ -55,6 +58,16 @@ public class MyDatasetsWidget extends Composite implements IMyDatasets {
 				.remove(datasetId);
 		datasetsPanel.remove(deletedDispDatasetWidget);
 
+		if (dispDataSetWidgets.size() == 0)
+			datasetsPanel.add(defaultWidget);
+
+	}
+
+	@Override
+	public void setDefaultWidget(Widget widget) {
+		if (dispDataSetWidgets.size() == 0)
+			datasetsPanel.add(widget);
+		this.defaultWidget = widget;
 	}
 
 }

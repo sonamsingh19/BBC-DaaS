@@ -152,6 +152,7 @@ public class DataSetsPreviewWidget extends Composite implements
 	public void refresh() {
 
 		cellTable.setVisibleRangeAndClearData(cellTable.getVisibleRange(), true);
+		
 
 	}
 
