@@ -160,7 +160,8 @@ public class TagCloud extends Composite {
                 int nboc = w.getNumberOfOccurences();
 
                 InlineHTML inline = new InlineHTML(" <a href='" + w.getLink() + "'>"
-                                + w.getWord() + "</a>&nbsp;");
+                            + w.getWord() + "</a>&nbsp;");
+               // InlineHTML inline = new InlineHTML(w.getWord() + "</a>&nbsp;");
                 inline.addStyleName("tag");
                 
                 if(w.getOrientation() == Tag.VERTICAL_LEFT)

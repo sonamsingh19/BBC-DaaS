@@ -2,7 +2,10 @@ package de.bbcdaas.opendata.gwt.client.layoutviews.widgets.TagCloud;
 
 import java.io.Serializable;
 
-public abstract class Tag implements Serializable{
+import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Composite;
+
+public abstract class Tag extends Composite implements Serializable{
 
     private static final long serialVersionUID = 2153391657389702774L;
     private String id;

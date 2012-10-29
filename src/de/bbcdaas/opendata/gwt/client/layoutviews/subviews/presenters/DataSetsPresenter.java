@@ -191,8 +191,20 @@ public class DataSetsPresenter extends
 					WordTag tag = new WordTag(word);
 					tag.setNumberOfOccurences(frequency);
 					String link = Window.Location.getPath();
-					tag.setLink(link);
+					String hash= Window.Location.getHash();
+			
+					tag.setLink("");
+					tag.sinkEvents(Event.ONCLICK);
+					tag.addHandler(new ClickHandler(){
 
+				        @Override
+				        public void onClick(ClickEvent event) {
+
+				            Window.alert("SimplePanel clicked!");
+
+				        }
+
+				    }, ClickEvent.getType());
 					if ((i % 3) == 0)
 						tag.setOrientation(2);
 					tagCloud.addWord(tag);
@@ -234,7 +246,7 @@ public class DataSetsPresenter extends
 
 	protected void showDataSet(String selectedDataSetId) {
 
-		addToHistory(selectedDataSetId);
+		addToHistory(dataSetIdString,selectedDataSetId);
 		eventBus.appLoading(false, view.getViewAsWidget());
 		dataSetWidget = GWT.create(DataSetWidget.class);
 		filterScreen = dataSetWidget.getFilterScreen();
@@ -268,9 +280,9 @@ public class DataSetsPresenter extends
 		addWidgetToView(dataSetWidget);
 	}
 
-	private void addToHistory(String selectedDataSetId) {
+	private void addToHistory(String queryParameter,String value) {
 		HashMap<String, String> queryString = new HashMap<String, String>();
-		queryString.put(dataSetIdString, selectedDataSetId);
+		queryString.put(queryParameter, value);
 		eventBus.setView(view.getViewAsWidget().asWidget(), view.getViewName()
 				.toString(), DataSetsPresenter.presenterID, queryString);
 	}

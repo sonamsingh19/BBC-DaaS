@@ -1,5 +1,8 @@
 package de.bbcdaas.opendata.gwt.client.layoutviews.widgets.TagCloud;
 
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Image;
 
 @SuppressWarnings("serial")
@@ -56,5 +59,4 @@ public class ImageTag extends Tag {
         }
         return link.equals(((Tag)obj).getLink());
     }
-    
 }

@@ -1,5 +1,6 @@
 package de.bbcdaas.opendata.gwt.client.layoutviews.widgets.TagCloud;
 
+
 @SuppressWarnings("serial")
 public class WordTag extends Tag{
     private String word;
@@ -48,5 +49,6 @@ public class WordTag extends Tag{
         }
         return word.equals(((WordTag)obj).getWord());
     }
+
 
 }
