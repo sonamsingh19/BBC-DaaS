@@ -1,5 +1,5 @@
 /*****************************
-        Tagcloud and tags
+        Tagcloud and tags s
 ******************************/
 
 .cloud{
@@ -32,6 +32,7 @@
 .tag1 a {
         font-size: 1em;
         font-weight: 100;
+          
 }
 
 .tag2 a{

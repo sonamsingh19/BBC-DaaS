@@ -28,17 +28,20 @@ import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.thirdparty.Span;
 public class AutoSuggestForm extends Composite {
 	FlowPanel form;
 	SuggestBox box;
-	Set<String>  tags;
+	Set<String> tags;
+	MultipleTextBox txtTB;
+
 	public String getText() {
-		return box.getText();
+		String textString=txtTB.getText();
+		return txtTB.getText();
 
 	}
 
 	public AutoSuggestForm(Set<String> tags) {
 		form = new FlowPanel();
-		MultipleTextBox txt = new MultipleTextBox();
-		this.tags=tags;
-		box = new SuggestBox(getSuggestions(tags), txt);
+		txtTB = new MultipleTextBox();
+		this.tags = tags;
+		box = new SuggestBox(getSuggestions(tags), txtTB);
 
 		box.addStyleName("original-token-input");
 
@@ -73,8 +76,6 @@ public class AutoSuggestForm extends Composite {
 		 * "<p>For more information about this demo, see <a href=\"http://raibledesigns.com/rd/entry/creating_a_facebook_style_autocomplete\">Creating a Facebook-style Autocomplete with GWT</a>."
 		 * ));
 		 */}
-
-
 
 	/**
 	 * Facebook Style Autocompleter. CSS and DIV structure from

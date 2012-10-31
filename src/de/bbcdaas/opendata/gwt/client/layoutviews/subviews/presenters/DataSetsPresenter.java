@@ -192,7 +192,7 @@ public class DataSetsPresenter extends
 
 			@Override
 			public void onSuccess(HashMap<String, Integer> result) {
-
+				System.out.println("Number of tags:"+result.size());
 				TagCloud tagCloud = new TagCloud();
 				tagCloud.setColored(true);
 				int i = 0;
