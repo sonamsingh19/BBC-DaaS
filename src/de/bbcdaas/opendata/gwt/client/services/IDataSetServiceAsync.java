@@ -9,6 +9,7 @@ import de.bbcdaas.opendata.gwt.shared.DataSet;
 import de.bbcdaas.opendata.gwt.shared.DataSetColumn;
 import de.bbcdaas.opendata.gwt.shared.DataSetDescription;
 import de.bbcdaas.opendata.gwt.shared.DataSetInfo;
+import de.bbcdaas.opendata.gwt.shared.SearchCriteria;
 import de.bbcdaas.opendata.gwt.shared.SortingOptions;
 
 public interface IDataSetServiceAsync {
@@ -44,6 +45,10 @@ public interface IDataSetServiceAsync {
 			AsyncCallback<Void> callback);
 
 	void DeleteDataset(String datasetId, AsyncCallback<Void> callback);
+
+	void getDataSetsBySearch(int start, int length,
+			SearchCriteria searchCriteria,
+			AsyncCallback<ArrayList<DataSetInfo>> callback);
 
 	
 

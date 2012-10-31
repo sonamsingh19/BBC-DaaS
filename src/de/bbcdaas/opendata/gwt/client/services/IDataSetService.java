@@ -3,6 +3,8 @@ package de.bbcdaas.opendata.gwt.client.services;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import java_cup.internal_error;
+
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 
@@ -10,6 +12,7 @@ import de.bbcdaas.opendata.gwt.shared.DataSet;
 import de.bbcdaas.opendata.gwt.shared.DataSetColumn;
 import de.bbcdaas.opendata.gwt.shared.DataSetDescription;
 import de.bbcdaas.opendata.gwt.shared.DataSetInfo;
+import de.bbcdaas.opendata.gwt.shared.SearchCriteria;
 import de.bbcdaas.opendata.gwt.shared.SortingOptions;
 
 @RemoteServiceRelativePath("DataSetService")
@@ -37,5 +40,7 @@ public interface IDataSetService extends RemoteService {
 	
 	public void setDatasetInfo(String id,DataSet datasetInfo);
 	void DeleteDataset(String datasetId);
+
+	public ArrayList<DataSetInfo> getDataSetsBySearch(int start,int length,SearchCriteria searchCriteria);
 
 }

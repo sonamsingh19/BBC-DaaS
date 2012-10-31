@@ -1,0 +1,2 @@
+serviceClass: de.bbcdaas.opendata.gwt.client.services.IDataSetService
+path: D3B83C95A1A7A669D63E76556E217B40.gwt.rpc

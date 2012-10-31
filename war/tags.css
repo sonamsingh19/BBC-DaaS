@@ -1,4 +1,4 @@
-﻿/*****************************
+/*****************************
         Tagcloud and tags
 ******************************/
 
@@ -17,10 +17,12 @@
         font-family: Verdana, Arial, serif, sans-serif;
         position: relative;
         float: left;
+     
 }
 
 .tag a:hover{
         text-decoration: underline;
+           cursor: pointer;
 }
 
 .tag a img{

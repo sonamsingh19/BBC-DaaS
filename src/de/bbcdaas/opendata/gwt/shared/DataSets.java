@@ -8,10 +8,10 @@ public class DataSets {
 
 	public static HashMap<String, DataSet> dataSets;
 	public static HashMap<String, DataSetDescription> dataSetDescriptions;
-	public static ArrayList<DataSetInfo> dataSetsInfos;
+	public static HashMap<String,DataSetInfo> dataSetsInfos;
 	public static HashMap<String, Integer> tags;
 	static {
-		dataSetsInfos = new ArrayList<DataSetInfo>();
+		dataSetsInfos = new HashMap<String,DataSetInfo>();
 		dataSets = new HashMap<String, DataSet>();
 		dataSetDescriptions = new HashMap<String, DataSetDescription>();
 		tags = new HashMap<String, Integer>();

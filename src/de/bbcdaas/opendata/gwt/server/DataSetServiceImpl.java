@@ -3,11 +3,15 @@ package de.bbcdaas.opendata.gwt.server;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
+
+import net.sourceforge.htmlunit.corejs.javascript.ast.ThrowStatement;
 
 import java_cup.internal_error;
 
@@ -23,6 +27,7 @@ import de.bbcdaas.opendata.gwt.shared.DataSetDescription;
 import de.bbcdaas.opendata.gwt.shared.DataSetInfo;
 import de.bbcdaas.opendata.gwt.shared.DataSetValues;
 import de.bbcdaas.opendata.gwt.shared.DataSets;
+import de.bbcdaas.opendata.gwt.shared.SearchCriteria;
 import de.bbcdaas.opendata.gwt.shared.SortingOptions;
 
 public class DataSetServiceImpl extends RemoteServiceServlet implements
@@ -35,8 +40,12 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 		ArrayList<DataSetInfo> resultArrayList = new ArrayList<DataSetInfo>();
 		switch (sortingOption) {
 		case DOWNLOADS:
-
-			List<DataSetInfo> list = getSubList(DataSets.dataSetsInfos, start,
+			ArrayList<DataSetInfo>alldatasets=new ArrayList<DataSetInfo>();
+		
+			for (DataSetInfo dataSetInfo :	DataSets.dataSetsInfos.values()) {
+				alldatasets.add(dataSetInfo);
+			}
+			List<DataSetInfo> list = getSubList( alldatasets, start,
 					length);
 			resultArrayList = getArrayList(list);
 			break;
@@ -84,13 +93,13 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 
 	}
 
-	private List<DataSetInfo> getSubList(List<DataSetInfo> list, int start,
+	private List<DataSetInfo> getSubList(ArrayList<DataSetInfo> collection, int start,
 			int length) {
 		ArrayList<DataSetInfo> arrayList = new ArrayList<DataSetInfo>();
-		if (list.size() < length)
-			length = list.size();
+		if (collection.size() < length)
+			length = collection.size();
 		for (int i = start; i < length; i++) {
-			arrayList.add(list.get(i));
+		arrayList.add(collection.get(i));
 		}
 		List<DataSetInfo> finalList = arrayList;
 		return finalList;
@@ -254,7 +263,7 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 		DataSetInfo dataSetInfo = new DataSetInfo(dataset.getName(), 1900);
 		dataSetInfo.setId(dataset.getId());
 		dataSetInfo.setName(dataset.getName());
-		DataSets.dataSetsInfos.add(dataSetInfo);
+		DataSets.dataSetsInfos.put(id,dataSetInfo);
 
 	}
 
@@ -262,14 +271,38 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 	public void DeleteDataset(String datasetId) {
 		DataSets.dataSets.remove(datasetId);
 		int index = 0;
-		for (DataSetInfo dataSetInfo : DataSets.dataSetsInfos) {
-			if (dataSetInfo.getId().equalsIgnoreCase(datasetId)) {
-				index = DataSets.dataSetsInfos.indexOf(dataSetInfo);
-				break;
+		if (DataSets.dataSetsInfos.containsKey(datasetId)) {
+			DataSets.dataSetsInfos.remove(datasetId);
+			DataSets.dataSetDescriptions.remove(datasetId);
+		} else
+			try {
+				throw new Exception("Dataset not found: " + datasetId);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
+
+	}
+
+	@Override
+	public ArrayList<DataSetInfo> getDataSetsBySearch(int start, int length,
+			SearchCriteria searchCriteria) {
+		// TODO:Added search for by tags only.increase search criteria
+		ArrayList<String> filteredDatasetIds = new ArrayList<String>();
+		ArrayList<DataSetInfo> filteredDataSets = new ArrayList<DataSetInfo>();
+		for (DataSetDescription dataSetDescription : DataSets.dataSetDescriptions
+				.values()) {
+			if (dataSetDescription.getTags().contains(searchCriteria.getTags())) {
+				filteredDatasetIds.add(dataSetDescription.getDataSetId());
+
+			}
+
 		}
-		DataSets.dataSetsInfos.remove(index);
-		DataSets.dataSetDescriptions.remove(datasetId);
+		for (String dataSetid : filteredDatasetIds) {
+			DataSetInfo dataset = DataSets.dataSetsInfos.get(dataSetid);
+			filteredDataSets.add(dataset);
+		}
+		return filteredDataSets;
 
 	}
 

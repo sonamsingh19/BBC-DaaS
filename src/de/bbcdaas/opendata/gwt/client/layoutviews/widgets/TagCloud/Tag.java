@@ -2,14 +2,18 @@ package de.bbcdaas.opendata.gwt.client.layoutviews.widgets.TagCloud;
 
 import java.io.Serializable;
 
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 
-public abstract class Tag extends Composite implements Serializable{
+public abstract class Tag extends Composite  implements Serializable{
 
     private static final long serialVersionUID = 2153391657389702774L;
     private String id;
     private int orientation;
+    
+    private ClickHandler clickhandler;
     
     protected String link;
     protected int numberOfOccurences;
@@ -62,5 +66,15 @@ public abstract class Tag extends Composite implements Serializable{
     public int getOrientation() {
         return orientation;
     }
+    
+    public void setClickHandler(ClickHandler handler){
+    	this.clickhandler= handler;
+    }
+
+	public ClickHandler getClickhandler() {
+		return clickhandler;
+	}
+
+	
 
 }

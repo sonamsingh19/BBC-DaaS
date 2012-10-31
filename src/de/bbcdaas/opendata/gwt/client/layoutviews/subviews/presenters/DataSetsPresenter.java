@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.print.DocFlavor.STRING;
+
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
@@ -43,6 +45,8 @@ import de.bbcdaas.opendata.gwt.shared.DataSet;
 import de.bbcdaas.opendata.gwt.shared.DataSetColumn;
 import de.bbcdaas.opendata.gwt.shared.DataSetDescription;
 import de.bbcdaas.opendata.gwt.shared.DataSetInfo;
+import de.bbcdaas.opendata.gwt.shared.DataSets;
+import de.bbcdaas.opendata.gwt.shared.SearchCriteria;
 import de.bbcdaas.opendata.gwt.shared.SortingOptions;
 import de.bbcdaas.opendata.gwt.shared.Enums.FilterOperations.DateOperations;
 import de.bbcdaas.opendata.gwt.shared.Enums.FilterOperations.FilterUtility;
@@ -58,6 +62,7 @@ public class DataSetsPresenter extends
 	@Inject
 	IDataSetServiceAsync dataServiceAsync;
 	final String dataSetIdString = "datasetId";
+	final String tagString = "tag";
 
 	SortingOptions defaultSortingOption;
 	AsyncDataProvider<DataSetInfo> provider;
@@ -110,34 +115,40 @@ public class DataSetsPresenter extends
 					}
 				});
 		defaultSortingOption = SortingOptions.DOWNLOADS;
+		final AsyncCallback<ArrayList<DataSetInfo>> callback = new AsyncCallback<ArrayList<DataSetInfo>>() {
+
+			@Override
+			public void onSuccess(ArrayList<DataSetInfo> result) {
+				final int start = 0;
+
+				provider.updateRowData(start, result);
+			 int size=	DataSets.dataSets.keySet().size();
+			 System.out.println(size);
+			 
+				eventBus.appLoading(true, view.getViewAsWidget());
+			}
+
+			@Override
+			public void onFailure(Throwable caught) { // TODO
+
+			}
+		};
 
 		provider = new AsyncDataProvider<DataSetInfo>() {
 
 			@Override
 			protected void onRangeChanged(HasData<DataSetInfo> display) {
-				eventBus.appLoading(false, view.getViewAsWidget());
 				final int start = display.getVisibleRange().getStart();
 				int length = display.getVisibleRange().getLength();
 
-				AsyncCallback<ArrayList<DataSetInfo>> callback = new AsyncCallback<ArrayList<DataSetInfo>>() {
-
-					@Override
-					public void onSuccess(ArrayList<DataSetInfo> result) {
-
-						updateRowData(start, result);
-						eventBus.appLoading(true, view.getViewAsWidget());
-					}
-
-					@Override
-					public void onFailure(Throwable caught) { // TODO
-
-					}
-				};
 				dataServiceAsync.getDataSets(start, length,
 						defaultSortingOption, callback);
-
 			}
 		};
+
+		int length = 10;
+
+		dataServiceAsync.getDataSets(0, length, defaultSortingOption, callback);
 
 		setDatasetCount();
 
@@ -188,23 +199,21 @@ public class DataSetsPresenter extends
 				for (String key : result.keySet()) {
 					int frequency = result.get(key);
 					String word = key;
-					WordTag tag = new WordTag(word);
+					final WordTag tag = new WordTag(word);
 					tag.setNumberOfOccurences(frequency);
-					String link = Window.Location.getPath();
-					String hash= Window.Location.getHash();
-			
+
 					tag.setLink("");
-					tag.sinkEvents(Event.ONCLICK);
-					tag.addHandler(new ClickHandler(){
+					tag.setClickHandler(new ClickHandler() {
 
-				        @Override
-				        public void onClick(ClickEvent event) {
+						@Override
+						public void onClick(ClickEvent event) {
+							filterbyTag(tag.getWord());
+							addToHistory(tagString, tag.getWord());
 
-				            Window.alert("SimplePanel clicked!");
+						}
 
-				        }
+					});
 
-				    }, ClickEvent.getType());
 					if ((i % 3) == 0)
 						tag.setOrientation(2);
 					tagCloud.addWord(tag);
@@ -215,6 +224,29 @@ public class DataSetsPresenter extends
 				dataSetPreviewWidget.getTagPanel().add(tagCloud);
 			}
 		});
+
+	}
+
+	private void filterbyTag(String tag) {
+		SearchCriteria searchCriteria = new SearchCriteria();
+		ArrayList<String> tags = new ArrayList<String>();
+		tags.add(tag);
+		searchCriteria.setTags(tags);
+		dataServiceAsync.getDataSetsBySearch(0, 10, searchCriteria,
+				new AsyncCallback<ArrayList<DataSetInfo>>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						// TODO Auto-generated method stub
+
+					}
+
+					@Override
+					public void onSuccess(ArrayList<DataSetInfo> result) {
+						provider.updateRowData(0, result);
+
+					}
+				});
 
 	}
 
@@ -246,7 +278,7 @@ public class DataSetsPresenter extends
 
 	protected void showDataSet(String selectedDataSetId) {
 
-		addToHistory(dataSetIdString,selectedDataSetId);
+		addToHistory(dataSetIdString, selectedDataSetId);
 		eventBus.appLoading(false, view.getViewAsWidget());
 		dataSetWidget = GWT.create(DataSetWidget.class);
 		filterScreen = dataSetWidget.getFilterScreen();
@@ -280,7 +312,7 @@ public class DataSetsPresenter extends
 		addWidgetToView(dataSetWidget);
 	}
 
-	private void addToHistory(String queryParameter,String value) {
+	private void addToHistory(String queryParameter, String value) {
 		HashMap<String, String> queryString = new HashMap<String, String>();
 		queryString.put(queryParameter, value);
 		eventBus.setView(view.getViewAsWidget().asWidget(), view.getViewName()
@@ -602,14 +634,12 @@ public class DataSetsPresenter extends
 
 			@Override
 			public void onSuccess(Integer result) {
-             
-				provider.updateRowCount(result,true);
+
+				provider.updateRowCount(result, true);
 
 			}
 		});
 
 	}
-
-	
 
 }
