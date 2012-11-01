@@ -41,7 +41,10 @@ public class MyDatasetsWidget extends Composite implements IMyDatasets {
 		datasetsPanel.add(dispdatasetWidget);
 		dispDataSetWidgets.put(dispdatasetWidget.getDatasetId(),
 				dispdatasetWidget);
+		
+		datasetsPanel.remove(defaultWidget);
 		return dispdatasetWidget;
+		
 
 	}
 
