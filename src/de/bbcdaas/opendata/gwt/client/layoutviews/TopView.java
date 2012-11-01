@@ -2,8 +2,10 @@ package de.bbcdaas.opendata.gwt.client.layoutviews;
 
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.HTMLPanel;
 import com.google.gwt.user.client.ui.HasWidgets;
@@ -14,10 +16,6 @@ import com.google.inject.Singleton;
 import de.bbcdaas.opendata.gwt.client.layoutviews.interfaces.ILoginView;
 import de.bbcdaas.opendata.gwt.client.layoutviews.interfaces.ILogoutView;
 import de.bbcdaas.opendata.gwt.client.layoutviews.interfaces.ITopView;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.HasClickHandlers;
 
 @Singleton
 public class TopView extends Composite implements ITopView {

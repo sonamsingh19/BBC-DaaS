@@ -2,18 +2,11 @@ package de.bbcdaas.opendata.gwt.server;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
-
-import net.sourceforge.htmlunit.corejs.javascript.ast.ThrowStatement;
-
-import java_cup.internal_error;
 
 import au.com.bytecode.opencsv.CSVReader;
 
@@ -177,10 +170,7 @@ public class DataSetServiceImpl extends RemoteServiceServlet implements
 		for (String tag : tags) {
 			if (!DataSets.tags.containsKey(tag))
 				DataSets.tags.put(tag, 5);
-			else {
-				DataSets.tags.put(tag, DataSets.tags.get(tag) * 2);
-			}
-
+		
 		}
 
 	}

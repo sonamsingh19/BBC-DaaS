@@ -3,8 +3,6 @@ package de.bbcdaas.opendata.gwt.client.services;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java_cup.internal_error;
-
 import com.google.gwt.user.client.rpc.RemoteService;
 import com.google.gwt.user.client.rpc.RemoteServiceRelativePath;
 

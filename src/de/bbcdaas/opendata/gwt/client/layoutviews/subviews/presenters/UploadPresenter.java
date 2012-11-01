@@ -2,12 +2,10 @@ package de.bbcdaas.opendata.gwt.client.layoutviews.subviews.presenters;
 
 import gwtupload.client.IUploadStatus.Status;
 import gwtupload.client.IUploader;
-import gwtupload.client.IUploader.OnFinishUploaderHandler;
 import gwtupload.client.IUploader.UploadedInfo;
 import gwtupload.client.Uploader;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 
 import com.google.gwt.core.client.GWT;
@@ -22,7 +20,6 @@ import com.mvp4g.client.presenter.BasePresenter;
 import de.bbcdaas.opendata.gwt.client.AppEventBus;
 import de.bbcdaas.opendata.gwt.client.layoutviews.subviews.UploadView;
 import de.bbcdaas.opendata.gwt.client.layoutviews.subviews.interfaces.IUploadView;
-
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.AutoSuggestForm;
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.DataDescriptionWidget;
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.KeyValueScreen;
@@ -33,8 +30,6 @@ import de.bbcdaas.opendata.gwt.client.services.IDataSetServiceAsync;
 import de.bbcdaas.opendata.gwt.shared.DataSet;
 import de.bbcdaas.opendata.gwt.shared.DataSetColumn;
 import de.bbcdaas.opendata.gwt.shared.DataSetDescription;
-import de.bbcdaas.opendata.gwt.shared.DataSetInfo;
-import de.bbcdaas.opendata.gwt.shared.DataSets;
 
 @Presenter(view = UploadView.class)
 public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
@@ -54,10 +49,12 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 	String fileUrl;
 	DataSet dataset;
 	AutoSuggestForm autoSuggestForm;
+
 	@Override
 	public void bind() {
 
-		setHeaderScreen = GWT.create(SetHeaderScreen.class);
+	createHeaderScreen();
+
 		dataServiceAsync.getTags(new AsyncCallback<HashMap<String, Integer>>() {
 
 			@Override
@@ -67,8 +64,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 
 			@Override
 			public void onSuccess(HashMap<String, Integer> result) {
-				 autoSuggestForm = new AutoSuggestForm(result
-						.keySet());
+				autoSuggestForm = new AutoSuggestForm(result.keySet());
 				dataDescriptionWidget = new DataDescriptionWidget(
 						autoSuggestForm);
 
@@ -92,6 +88,13 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 			}
 
 		});
+		// Add a finish handler which will load the image once the upload
+		// finishes
+		uploader.addOnFinishUploadHandler(onFinishUploaderHandler);
+		}
+
+	private void createHeaderScreen() {
+		setHeaderScreen = GWT.create(SetHeaderScreen.class);
 
 		setHeaderScreen.getSaveClickHandlers().addClickHandler(
 				new ClickHandler() {
@@ -103,11 +106,6 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 					}
 
 				});
-
-		// Add a finish handler which will load the image once the upload
-		// finishes
-		uploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-
 	}
 
 	private void parseFile(char delimiter) {
@@ -293,7 +291,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 						ArrayList<KeyValueWidget> keyValueWidgets = keyValueScreen
 								.getAllIKeyValueWidgets();
 						eventBus.goToHomepage();
-					clearData();
+						clearData();
 					}
 				});
 
@@ -301,13 +299,16 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 
 	protected void clearFields() {
 		uploadWidget.getUploader().reset();
-		
-	}
-	private void clearData() {
-		contentPanel.clear();
-		contentPanel.add(uploadWidget);
 
-		dataDescriptionWidget=new DataDescriptionWidget(autoSuggestForm);
+	}
+
+	private void clearData() {
+		
+		contentPanel.clear();
+		createHeaderScreen();
+		contentPanel.add(uploadWidget);
+		autoSuggestForm.clearText();
+		dataDescriptionWidget = new DataDescriptionWidget(autoSuggestForm);
 
 	}
 
@@ -338,9 +339,8 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 
 		contentPanel.clear();
 		contentPanel.add(setHeaderScreen);
-
 		setHeaderScreen.setColumnInitialHeaders(result);
-
+		
 		eventBus.appLoading(true, view.getViewAsWidget());
 	}
 
@@ -349,8 +349,8 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 			if (presenterID.equals(presenterID)) {
 				{
 
-					contentPanel.clear();
-					contentPanel.add(uploadWidget);
+					clearData();
+					clearFields();
 
 				}
 			}

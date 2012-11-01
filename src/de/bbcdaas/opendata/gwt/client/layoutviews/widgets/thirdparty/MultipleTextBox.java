@@ -34,7 +34,7 @@ public class MultipleTextBox extends TextBoxBase {
 
     @Override
     public String getText() {
-      /*  String wholeString = super.getText();
+        String wholeString = super.getText();
         String lastString = wholeString;
         if (wholeString != null && !wholeString.trim().equals("")) {
             int lastComma = wholeString.trim().lastIndexOf(",");
@@ -42,11 +42,14 @@ public class MultipleTextBox extends TextBoxBase {
                 lastString = wholeString.trim().substring(lastComma + 1);
             }
         }
-        return lastString;*/
-    	return super.getText();
-    	
+        return lastString;
     	
     }
+    public String getAllTags() {
+
+    	return super.getText();
+    	
+	}
 
     @Override
     public void setText(String text) {

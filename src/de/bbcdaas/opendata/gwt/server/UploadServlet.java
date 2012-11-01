@@ -4,15 +4,9 @@ import gwtupload.server.UploadAction;
 import gwtupload.server.exceptions.UploadActionException;
 import gwtupload.shared.UConsts;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Random;
@@ -21,14 +15,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.fileupload.FileItem;
-
-import au.com.bytecode.opencsv.CSVReader;
-import de.bbcdaas.opendata.gwt.shared.ColumnType;
-import de.bbcdaas.opendata.gwt.shared.DataSet;
-import de.bbcdaas.opendata.gwt.shared.DataSetColumn;
-import de.bbcdaas.opendata.gwt.shared.DataSetInfo;
-import de.bbcdaas.opendata.gwt.shared.DataSetValues;
-import de.bbcdaas.opendata.gwt.shared.DataSets;
 
 public class UploadServlet extends UploadAction {
 

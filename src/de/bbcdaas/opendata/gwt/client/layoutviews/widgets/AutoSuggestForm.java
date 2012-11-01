@@ -32,11 +32,14 @@ public class AutoSuggestForm extends Composite {
 	MultipleTextBox txtTB;
 
 	public String getText() {
-		String textString=txtTB.getText();
-		return txtTB.getText();
+		return txtTB.getAllTags();
 
 	}
 
+	public void clearText(){
+		txtTB.setText("");
+		
+	}
 	public AutoSuggestForm(Set<String> tags) {
 		form = new FlowPanel();
 		txtTB = new MultipleTextBox();

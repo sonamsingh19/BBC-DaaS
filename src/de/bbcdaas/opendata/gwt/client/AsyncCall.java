@@ -1,6 +1,5 @@
 package de.bbcdaas.opendata.gwt.client;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 
 public abstract class AsyncCall<T> implements AsyncCallback<T> {

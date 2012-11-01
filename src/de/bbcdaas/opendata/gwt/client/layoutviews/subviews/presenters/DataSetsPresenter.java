@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import javax.print.DocFlavor.STRING;
-
 import com.google.gwt.cell.client.TextCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Document;
@@ -17,7 +15,6 @@ import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.user.cellview.client.CellTable;
 import com.google.gwt.user.cellview.client.Column;
 import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
@@ -45,7 +42,6 @@ import de.bbcdaas.opendata.gwt.shared.DataSet;
 import de.bbcdaas.opendata.gwt.shared.DataSetColumn;
 import de.bbcdaas.opendata.gwt.shared.DataSetDescription;
 import de.bbcdaas.opendata.gwt.shared.DataSetInfo;
-import de.bbcdaas.opendata.gwt.shared.DataSets;
 import de.bbcdaas.opendata.gwt.shared.SearchCriteria;
 import de.bbcdaas.opendata.gwt.shared.SortingOptions;
 import de.bbcdaas.opendata.gwt.shared.Enums.FilterOperations.DateOperations;
@@ -122,9 +118,7 @@ public class DataSetsPresenter extends
 				final int start = 0;
 
 				provider.updateRowData(start, result);
-			 int size=	DataSets.dataSets.keySet().size();
-			 System.out.println(size);
-			 
+		 
 				eventBus.appLoading(true, view.getViewAsWidget());
 			}
 
@@ -596,7 +590,7 @@ public class DataSetsPresenter extends
 
 			if (presenterID.equals(DataSetsPresenter.presenterID)) {
 
-				refreshDataSets();
+	/*			refreshDataSets();
 				String datasetIdHash = Window.Location.getHash();
 				if (datasetIdHash.toLowerCase().contains(
 						dataSetIdString.toLowerCase())) {
@@ -607,12 +601,17 @@ public class DataSetsPresenter extends
 					addWidgetToView((Widget) dataSetPreviewWidget);
 				}
 
-			}
-		}
+			}*/
+				onGoToHomepage();
+		
 	}
+		}
+		}
 
 	public void onSetView(IsWidget widget, String pageName, String presenterID,
 			HashMap<String, String> queryParameters) {
+		onGoToHomepage();
+
 		/*
 		 * if (presenterID.equals(DataSetsPresenter.presenterID)) { if
 		 * (queryParameters.keySet().contains(dataSetIdString)) { String
@@ -622,7 +621,10 @@ public class DataSetsPresenter extends
 	}
 
 	public void onGoToHomepage() {
+
 		refreshDataSets();
+		addWidgetToView((Widget) dataSetPreviewWidget);
+		
 		dataServiceAsync.getDataSetCount(new AsyncCallback<Integer>() {
 
 			@Override

@@ -1,6 +1,5 @@
 package de.bbcdaas.opendata.gwt.shared;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 

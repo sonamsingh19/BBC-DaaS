@@ -3,14 +3,14 @@ package de.bbcdaas.opendata.gwt.client.layoutviews.widgets;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
+import com.google.gwt.uibinder.client.UiField;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
+import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Widget;
 
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.interfaces.IDispDataSetWidget;
 import de.bbcdaas.opendata.gwt.shared.DataSetInfo;
-import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Button;
 
 public class DispDataSetWidget extends Composite implements IDispDataSetWidget {
 

@@ -3,8 +3,6 @@ package de.bbcdaas.opendata.gwt.client.layoutviews.widgets.TagCloud;
 import java.io.Serializable;
 
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.HasClickHandlers;
-import com.google.gwt.user.client.ui.Anchor;
 import com.google.gwt.user.client.ui.Composite;
 
 public abstract class Tag extends Composite  implements Serializable{
