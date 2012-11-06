@@ -18,14 +18,13 @@ public class ContentViewHistoryConverter implements
 	public void convertFromToken(String historyName, String param,
 			AppEventBus eventBus) {
 
-		try {
+//		try {
 			String id = Helpers.getPresenterID(param);
 			eventBus.handleHistory(id);
 
-		} catch (NullPointerException e) {
+		//} catch (NullPointerException e) {
 			
-			System.out.println("error:failed to get presenter id ,Querystring : "+param);
-		}
+		//	System.out.println("error:failed to get presenter id ,Querystring : "+param);		}
 
 	}
 
@@ -38,6 +37,7 @@ public class ContentViewHistoryConverter implements
 	public String onSetView(IsWidget body, String pageName, String presenterID,
 			HashMap<String, String> queryParameters) {
 		String queryString = "view=" + pageName + "&&ID=" + presenterID;
+		//if(queryParameters.containsKey("ID"))
 		for (String key : queryParameters.keySet()) {
 			queryString = queryString + "&&" + key + "="
 					+ queryParameters.get(key);

@@ -1,5 +1,2 @@
 # Module gwtUI
 # RPC service class, partial path of RPC policy file
-de.bbcdaas.opendata.gwt.client.services.IUserService, 64723E1BF079E8190717F900F5616BE0.gwt.rpc
-de.bbcdaas.opendata.gwt.client.services.ILoginService, 78166D95238E2576041A0FF5E873DDF4.gwt.rpc
-de.bbcdaas.opendata.gwt.client.services.IDataSetService, D3B83C95A1A7A669D63E76556E217B40.gwt.rpc

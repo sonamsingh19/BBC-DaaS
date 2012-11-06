@@ -37,7 +37,7 @@ public class ContentPanePresenter extends
 	public void onStart() {
 		this.dataSetsView = view.getDataSetsView();
 		this.uploadView = view.getUploadView();
-		HashMap<String, String> queryStrings = new HashMap<String, String>();
+	/*	HashMap<String, String> queryStrings = new HashMap<String, String>();
 		String datasetIdHash = Window.Location.getHash();
 		if (!datasetIdHash.isEmpty()) {
 			String queryString = datasetIdHash.substring(datasetIdHash
@@ -49,9 +49,9 @@ public class ContentPanePresenter extends
 					queryStrings.put(queryKeyValue[0], queryKeyValue[1]);
 				}
 			}
-		}
+		}*/
 		eventBus.setView(dataSetsView, dataSetsView.getViewName().toString(),
-				DataSetsPresenter.presenterID, queryStrings);
+				DataSetsPresenter.presenterID, new HashMap<String, String>());
 	}
 
 	@Override

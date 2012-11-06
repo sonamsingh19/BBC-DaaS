@@ -53,7 +53,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 	@Override
 	public void bind() {
 
-	createHeaderScreen();
+		createHeaderScreen();
 
 		dataServiceAsync.getTags(new AsyncCallback<HashMap<String, Integer>>() {
 
@@ -91,7 +91,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 		// Add a finish handler which will load the image once the upload
 		// finishes
 		uploader.addOnFinishUploadHandler(onFinishUploaderHandler);
-		}
+	}
 
 	private void createHeaderScreen() {
 		setHeaderScreen = GWT.create(SetHeaderScreen.class);
@@ -303,12 +303,14 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 	}
 
 	private void clearData() {
-		
+
 		contentPanel.clear();
 		createHeaderScreen();
 		contentPanel.add(uploadWidget);
-		autoSuggestForm.clearText();
-		dataDescriptionWidget = new DataDescriptionWidget(autoSuggestForm);
+		if (autoSuggestForm != null) {
+			autoSuggestForm.clearText();
+			dataDescriptionWidget = new DataDescriptionWidget(autoSuggestForm);
+		}
 
 	}
 
@@ -340,7 +342,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 		contentPanel.clear();
 		contentPanel.add(setHeaderScreen);
 		setHeaderScreen.setColumnInitialHeaders(result);
-		
+
 		eventBus.appLoading(true, view.getViewAsWidget());
 	}
 
