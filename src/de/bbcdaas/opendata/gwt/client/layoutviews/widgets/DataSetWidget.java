@@ -25,22 +25,21 @@ public class DataSetWidget extends Composite implements IDataSetWidget {
 	private static DataSetWidgetUiBinder uiBinder = GWT
 			.create(DataSetWidgetUiBinder.class);
 	@UiField(provided = true)
-	CellTable< ArrayList<String>> datasetTable;
+	CellTable<ArrayList<String>> datasetTable;
 	@UiField
 	SimplePager pager;
 	@UiField
 	SimplePanel panel;
-	@UiField FilterScreen filterScreen;
+	@UiField
+	FilterScreen filterScreen;
 
-	
 	interface DataSetWidgetUiBinder extends UiBinder<Widget, DataSetWidget> {
 	}
 
 	public DataSetWidget() {
-		  CellTable.Resources resources = GWT.create(TableResources.class);
-		datasetTable = new CellTable< ArrayList<String>>(15, resources);
+		CellTable.Resources resources = GWT.create(TableResources.class);
+		datasetTable = new CellTable<ArrayList<String>>(15, resources);
 		initWidget(uiBinder.createAndBindUi(this));
-	
 
 	}
 
@@ -52,10 +51,9 @@ public class DataSetWidget extends Composite implements IDataSetWidget {
 	@Override
 	public void setcolumns(int size,
 			ArrayList<Column<List<String>, String>> columns) {
-	
+
 	}
 
-	
 	@Override
 	public CellTable<ArrayList<String>> getCellTable() {
 		return datasetTable;
@@ -63,15 +61,15 @@ public class DataSetWidget extends Composite implements IDataSetWidget {
 
 	@Override
 	public void update() {
-	
+
 		pager.setDisplay(datasetTable);
-		
+
 	}
 
 	@Override
 	public void setDataProvider(ListDataProvider<ArrayList<String>> provider) {
-provider.addDataDisplay(datasetTable);
-pager.setDisplay(datasetTable);
+		provider.addDataDisplay(datasetTable);
+		pager.setDisplay(datasetTable);
 	}
 
 	@Override

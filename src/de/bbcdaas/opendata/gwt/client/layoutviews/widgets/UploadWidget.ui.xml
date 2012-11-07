@@ -24,8 +24,8 @@
 				</g:HorizontalPanel>
 			</g:CaptionPanel>
 			</g:VerticalPanel>
-			<g:Cell horizontalAlignment="ALIGN_RIGHT">
-				<g:Button ui:field="nextBtn" text="Next" styleName="imageBtn"/>
+			<g:Cell horizontalAlignment="ALIGN_CENTER">
+				<g:PushButton ui:field="nextBtn" text="Next" width="80px" height="25px"/>
 			</g:Cell>
 		</g:VerticalPanel>
 	</g:HTMLPanel>

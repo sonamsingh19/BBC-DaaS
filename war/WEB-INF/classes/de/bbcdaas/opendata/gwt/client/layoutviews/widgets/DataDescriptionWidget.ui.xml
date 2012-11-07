@@ -14,7 +14,8 @@
 				<g:customCell>
 					<g:HorizontalPanel spacing="10">
 						<g:Label text="Name :" horizontalAlignment="ALIGN_LEFT"/>
-						<g:TextBox ui:field="name" alignment="LEFT" width="358px"/>
+						<g:TextBox ui:field="nameTB" alignment="LEFT" width="358px"/>
+						<g:Label text="*"/>
 					</g:HorizontalPanel>
 				</g:customCell>
 			</g:row>

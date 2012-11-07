@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.HasClickHandlers;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
@@ -20,7 +21,7 @@ public class DataDescriptionWidget extends Composite implements
 	private static DataDescriptionWidgetUiBinder uiBinder = GWT
 			.create(DataDescriptionWidgetUiBinder.class);
 	@UiField
-	TextBox name;
+	TextBox nameTB;
 	@UiField
 	TextArea description;
 	@UiField
@@ -46,7 +47,7 @@ public class DataDescriptionWidget extends Composite implements
 	@Override
 	public String getName() {
 
-		return name.getValue();
+		return nameTB.getValue();
 	}
 
 	@Override
@@ -79,5 +80,16 @@ public class DataDescriptionWidget extends Composite implements
 
 		
 	}
+
+	@Override
+	public void setPublishBtnEnabled(boolean enabled) {
+		publishBtn.setEnabled(enabled);
+	}
+
+	@Override
+	public HasValueChangeHandlers<String> getNameValueChangeHandlers() {
+	return nameTB;
+	}
+	
 
 }

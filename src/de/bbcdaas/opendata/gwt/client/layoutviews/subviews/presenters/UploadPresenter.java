@@ -11,6 +11,8 @@ import java.util.HashMap;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.inject.Inject;
@@ -67,6 +69,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 				autoSuggestForm = new AutoSuggestForm(result.keySet());
 				dataDescriptionWidget = new DataDescriptionWidget(
 						autoSuggestForm);
+				setPublishBtnValueChangeHandlers();
 
 			}
 		});
@@ -77,6 +80,8 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 		contentPanel.add(uploadWidget);
 
 		this.uploader = uploadWidget.getUploader();
+		uploadWidget.setNextBtnEnabled(false);
+
 		uploadWidget.getNextScreenBtn().addClickHandler(new ClickHandler() {
 
 			@Override
@@ -175,6 +180,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 				System.out.println("Server message " + info.message);
 
 				fileUrl = info.message.split("=")[1];
+				uploadWidget.setNextBtnEnabled(true);
 
 			}
 		}
@@ -299,6 +305,7 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 
 	protected void clearFields() {
 		uploadWidget.getUploader().reset();
+		uploadWidget.setNextBtnEnabled(false);
 
 	}
 
@@ -310,8 +317,30 @@ public class UploadPresenter extends BasePresenter<IUploadView, AppEventBus> {
 		if (autoSuggestForm != null) {
 			autoSuggestForm.clearText();
 			dataDescriptionWidget = new DataDescriptionWidget(autoSuggestForm);
+			setPublishBtnValueChangeHandlers();
+
 		}
 
+	}
+
+	void setPublishBtnValueChangeHandlers() {
+		if (dataDescriptionWidget.getName().length() == 0) {
+			dataDescriptionWidget.setPublishBtnEnabled(false);
+		}
+		dataDescriptionWidget.getNameValueChangeHandlers()
+				.addValueChangeHandler(new ValueChangeHandler<String>() {
+
+					@Override
+					public void onValueChange(ValueChangeEvent<String> event) {
+
+						if (event.getValue().trim().length() == 0)
+							dataDescriptionWidget.setPublishBtnEnabled(false);
+
+						else
+							dataDescriptionWidget.setPublishBtnEnabled(true);
+					}
+
+				});
 	}
 
 	protected void loadHeaderScreen(String dataSetId) {

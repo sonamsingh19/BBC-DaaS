@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.Widget;
 
 import de.bbcdaas.opendata.gwt.client.layoutviews.widgets.interfaces.IUploadWidget;
+import com.google.gwt.user.client.ui.PushButton;
 
 public class UploadWidget extends Composite implements IUploadWidget {
 
@@ -31,7 +32,7 @@ public class UploadWidget extends Composite implements IUploadWidget {
 	@UiField
 	RadioButton commaRB;
 	@UiField
-	Button nextBtn;
+	PushButton nextBtn;
 	boolean customRBSelected;
 
 	interface UploadWidgetUiBinder extends UiBinder<Widget, UploadWidget> {
@@ -93,6 +94,11 @@ public class UploadWidget extends Composite implements IUploadWidget {
 	@Override
 	public HasClickHandlers getNextScreenBtn() {
 		return nextBtn;
+	}
+
+	@Override
+	public void setNextBtnEnabled(Boolean enabled) {
+		 nextBtn.setEnabled(enabled);
 	}
 
 }
