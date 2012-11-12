@@ -46,26 +46,20 @@ public class DownloadServlet extends HttpServlet {
 		case CSV: {
 			resp.addHeader("Content-Disposition", "attachment;filename="
 					+ datasetId + ".csv");
-		
-			List<ArrayList<String>> csvLines=getCSVFormat(datasetId)	;	
-			String separator=",";
-			String fileString="";
-			 for (int i = 0; i < csvLines.size(); i++) {
-			    ArrayList<String> row=	csvLines.get(i);
-			    String rowString="";
-			    for (String value : row) {
-				rowString=rowString+value+separator;
-				}
-			   rowString= rowString.substring(0, rowString.length()-separator.length());
-			    fileString=fileString+rowString;
 
-			    System.out.println(rowString);
-		
+			List<ArrayList<String>> csvLines = getCSVFormat(datasetId);
+			String separator = ",";
+			StringBuilder fileString = new StringBuilder();
+			String newline = System.getProperty("line.separator");
+			for (int i = 0; i < csvLines.size(); i++) {
+				ArrayList<String> row = csvLines.get(i);
+				String rowString = concatValuesWithSeparator(row, separator);
+				fileString = fileString.append(rowString).append(newline);
+
 			}
-		
-				out.write(fileString.getBytes());
-			
-			
+
+			out.write(fileString.toString().getBytes());
+
 		}
 
 			break;
@@ -104,6 +98,18 @@ public class DownloadServlet extends HttpServlet {
 		}
 
 		out.flush();
+
+	}
+
+	public String concatValuesWithSeparator(ArrayList<String> values,
+			String separator) {
+		StringBuilder sb = new StringBuilder(values.get(0));
+
+		for (int i = 1; i < values.size(); i++) {
+			sb.append(separator).append(values.get(i));
+		}
+
+		return sb.toString();
 
 	}
 
